@@ -8,6 +8,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { CurrencySwitch } from './CurrencySwitch';
+import { LanguageSwitch } from './LanguageSwitch';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-gradient">TEKTIAS</span>
+            <span className="text-2xl font-bold text-gradient">SGSCRIPT.LIFE</span>
           </Link>
         </div>
 
@@ -41,7 +42,10 @@ const Navbar = () => {
           <Link to="/contact" className="text-sm hover:text-primary transition-colors">
             Contact
           </Link>
-          <CurrencySwitch />
+          <div className="flex items-center space-x-4">
+            <CurrencySwitch />
+            <LanguageSwitch />
+          </div>
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -102,8 +106,9 @@ const Navbar = () => {
               <Link to="/contact" className="text-lg">
                 Contact
               </Link>
-              <div className="pt-4">
+              <div className="pt-4 flex space-x-4">
                 <CurrencySwitch />
+                <LanguageSwitch />
               </div>
               <div className="pt-4 flex flex-col space-y-4">
                 {isLoggedIn ? (
