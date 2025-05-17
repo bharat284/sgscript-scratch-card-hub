@@ -7,6 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useCurrency } from '@/context/CurrencyContext';
 import Navbar from '@/components/Navbar';
 import { useToast } from '@/hooks/use-toast';
+import TradingViewWidget from '@/components/TradingViewWidget';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -50,6 +51,25 @@ const Dashboard = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-8 flex-1">
         <h1 className="text-3xl font-bold mb-8">Welcome, {user?.name || 'User'}</h1>
+
+        {/* TradingView Widget */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>SGSCRIPT.LIFE Market Analysis</CardTitle>
+            <CardDescription>
+              Real-time market data and analysis tools
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="h-[500px] w-full">
+              <TradingViewWidget 
+                theme="dark" 
+                symbol="BINANCE:BTCUSDT" 
+                autosize={true}
+              />
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Main Content */}
