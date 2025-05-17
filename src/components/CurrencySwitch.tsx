@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -7,10 +6,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useCurrency } from '@/context/CurrencyContext';
 
 export const CurrencySwitch = () => {
-  const [currency, setCurrency] = useLocalStorage('currency', 'USD');
+  const { currency, setCurrency } = useCurrency();
 
   return (
     <DropdownMenu>
