@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type Country = 'in' | 'us' | 'uk' | 'ca' | 'au';
+type Country = 'in' | 'ae' | 'us' | 'uk' | 'ca' | 'au';
 
 interface CountryContextType {
   country: Country;
@@ -17,6 +17,7 @@ interface CountryContextType {
 
 const countries = {
   in: 'India',
+  ae: 'UAE',
   us: 'USA',
   uk: 'UK',
   ca: 'Canada',
@@ -53,6 +54,7 @@ export const CountrySelect: React.FC = () => {
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="in">India</SelectItem>
+        <SelectItem value="ae">UAE</SelectItem>
         <SelectItem value="us">USA</SelectItem>
         <SelectItem value="uk">UK</SelectItem>
         <SelectItem value="ca">Canada</SelectItem>

@@ -5,11 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCurrency } from '@/context/CurrencyContext';
 import { useLanguage } from '@/components/LanguageSwitch';
+import { useCountry } from '@/components/CountrySelect';
 import { Link } from 'react-router-dom';
 
 const Products = () => {
   const { formatPrice } = useCurrency();
   const { language } = useLanguage();
+  const { country } = useCountry();
 
   return (
     <div className="min-h-screen flex flex-col bg-brand-dark-purple">

@@ -4,10 +4,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CountryProvider } from "./components/CountrySelect";
 import { CurrencyProvider } from "./context/CurrencyContext";
 import { AuthProvider } from "./context/AuthContext";
 import { LanguageProvider } from "./components/LanguageSwitch";
-import { CountryProvider } from "./components/CountrySelect";
 
 // Pages
 import Index from "./pages/Index";
@@ -28,10 +28,10 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <CurrencyProvider>
-        <AuthProvider>
-          <LanguageProvider>
-            <CountryProvider>
+      <CountryProvider>
+        <CurrencyProvider>
+          <AuthProvider>
+            <LanguageProvider>
               <Toaster />
               <Sonner />
               <BrowserRouter>
@@ -50,10 +50,10 @@ const App = () => (
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>
-            </CountryProvider>
-          </LanguageProvider>
-        </AuthProvider>
-      </CurrencyProvider>
+            </LanguageProvider>
+          </AuthProvider>
+        </CurrencyProvider>
+      </CountryProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

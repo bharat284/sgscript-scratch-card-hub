@@ -1,6 +1,7 @@
 
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useCountry } from '@/components/CountrySelect';
 
 type CurrencyType = 'USD' | 'INR';
 
@@ -14,12 +15,19 @@ const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
   const [currency, setCurrency] = useLocalStorage<CurrencyType>('currency', 'USD');
+  const { country } = useCountry();
 
   // Use useMemo to optimize the formatPrice function
   const formatPrice = useMemo(() => {
     return (amount: number): string => {
       const exchangeRate = 83; // 1 USD = 83 INR approximately
       
+      // If country is India, show price in INR regardless of selected currency
+      if (country === 'in') {
+        return `₹${(amount * exchangeRate).toFixed(2)}`;
+      }
+      
+      // For other countries, use the selected currency
       if (currency === 'INR') {
         const inrAmount = amount * exchangeRate;
         return `₹${inrAmount.toFixed(2)}`;
@@ -27,7 +35,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
       
       return `$${amount.toFixed(2)}`;
     };
-  }, [currency]);
+  }, [currency, country]);
 
   // Create a memoized context value
   const contextValue = useMemo(() => ({

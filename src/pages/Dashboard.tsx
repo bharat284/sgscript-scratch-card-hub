@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
 import { useCurrency } from '@/context/CurrencyContext';
+import { useCountry } from '@/components/CountrySelect';
 import Navbar from '@/components/Navbar';
 import { useToast } from '@/hooks/use-toast';
 import TradingViewWidget from '@/components/TradingViewWidget';
@@ -12,6 +13,7 @@ import TradingViewWidget from '@/components/TradingViewWidget';
 const Dashboard = () => {
   const { user } = useAuth();
   const { formatPrice } = useCurrency();
+  const { country } = useCountry();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -35,7 +37,7 @@ const Dashboard = () => {
   const scratchCard = {
     available: true,
     activeDate: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1),
-    amount: '₹2',
+    amount: country === 'in' ? '₹2' : '$0.02',
   };
 
   const formatDate = (date: Date) => {
@@ -96,7 +98,7 @@ const Dashboard = () => {
                     <div className="flex items-center mb-6">
                       <div className="text-2xl font-bold mr-2">{formatPrice(10)}</div>
                       <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">
-                        One-time purchase
+                        Monthly subscription
                       </span>
                     </div>
                     <Button 
@@ -133,7 +135,7 @@ const Dashboard = () => {
                       </div>
                       {scratchCard.available && (
                         <div className="text-2xl font-bold text-primary">
-                          Win up to ₹1000!
+                          Win up to {country === 'in' ? '₹1000' : '$10'}!
                         </div>
                       )}
                     </div>
@@ -144,8 +146,12 @@ const Dashboard = () => {
                       Every active subscriber receives a scratch card that becomes available at the end of the month.
                     </p>
                     <ul className="list-disc list-inside mb-4 space-y-1 text-sm text-muted-foreground">
-                      <li>Regular prizes: ₹1, ₹2, or ₹3</li>
-                      <li>Special prizes: Two lucky users win ₹500 and ₹1000!</li>
+                      <li>
+                        Regular prizes: {country === 'in' ? '₹1, ₹2, or ₹3' : '$0.01, $0.02, or $0.03'}
+                      </li>
+                      <li>
+                        Special prizes: Two lucky users win {country === 'in' ? '₹500 and ₹1000' : '$5 and $10'}!
+                      </li>
                       <li>Prizes are credited to your wallet or bank account</li>
                     </ul>
                     <div className="p-3 bg-primary/10 rounded-md">
