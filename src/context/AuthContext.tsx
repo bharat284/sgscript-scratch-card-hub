@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
@@ -11,13 +10,16 @@ interface User {
   cryptoAccountId?: string;
   emailVerified: boolean;
   phoneVerified: boolean;
+  referredBy?: string;
+  referralCount?: number;
+  subscriptionExpiryDate?: Date;
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, name: string, phone: string) => Promise<void>;
+  signup: (email: string, password: string, name: string, phone: string, referredBy?: string) => Promise<void>;
   logout: () => void;
   forgotPassword: (email: string) => Promise<void>;
   resetPassword: (token: string, newPassword: string) => Promise<void>;
@@ -57,6 +59,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           email,
           emailVerified: false,
           phoneVerified: false,
+          referredBy: 'Organic', // Default to organic
+          referralCount: 2, // Mock some referrals
+          subscriptionExpiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
         };
         localStorage.setItem('user', JSON.stringify(userData));
         setUser(userData);
@@ -69,7 +74,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Mock signup function
-  const signup = async (email: string, password: string, name: string, phone: string) => {
+  const signup = async (email: string, password: string, name: string, phone: string, referredBy?: string) => {
     setLoading(true);
     try {
       // This would be replaced with an actual API call
@@ -82,6 +87,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         phone,
         emailVerified: false,
         phoneVerified: false,
+        referredBy: referredBy || 'Organic',
+        referralCount: 0,
+        subscriptionExpiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
       };
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);

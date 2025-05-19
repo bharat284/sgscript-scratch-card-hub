@@ -7,14 +7,14 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { LanguageSwitch } from './LanguageSwitch';
+import { useAuth } from '@/context/AuthContext';
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, logout } = useAuth();
+  const isLoggedIn = !!user;
   
-  // This would be replaced with actual auth state management
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    logout();
     // Navigate to home or perform actual logout
   };
 
@@ -41,9 +41,6 @@ const Navbar = () => {
           <Link to="/contact" className="text-sm hover:text-primary transition-colors">
             Contact
           </Link>
-          <div className="flex items-center space-x-4">
-            <LanguageSwitch />
-          </div>
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -104,9 +101,6 @@ const Navbar = () => {
               <Link to="/contact" className="text-lg">
                 Contact
               </Link>
-              <div className="pt-4 flex">
-                <LanguageSwitch />
-              </div>
               <div className="pt-4 flex flex-col space-y-4">
                 {isLoggedIn ? (
                   <>

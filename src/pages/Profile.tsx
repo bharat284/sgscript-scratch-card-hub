@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
+import CountdownTimer from '@/components/CountdownTimer';
+import ReferralLink from '@/components/ReferralLink';
 
 const Profile = () => {
   const { user, updateUserProfile, requestEmailVerification, requestPhoneVerification, verifyEmail, verifyPhone } = useAuth();
@@ -25,6 +26,9 @@ const Profile = () => {
   const [sendingPhoneOtp, setSendingPhoneOtp] = useState(false);
   const [verifyingEmail, setVerifyingEmail] = useState(false);
   const [verifyingPhone, setVerifyingPhone] = useState(false);
+
+  // Calculate subscription expiry date
+  const subscriptionExpiryDate = user?.subscriptionExpiryDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,11 +137,30 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-dark-purple">
+    <div className="min-h-screen flex flex-col bg-brand-dark-purple page-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8 flex-1">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Your Profile</h1>
+          <div className="flex flex-col md:flex-row items-start justify-between mb-8">
+            <div>
+              <h1 className="text-3xl font-bold">Your Profile</h1>
+              {user?.referredBy && (
+                <p className="text-muted-foreground mt-1">
+                  Referred by: <span className="text-primary">{user.referredBy}</span>
+                </p>
+              )}
+            </div>
+            
+            {/* Subscription Timer */}
+            <div className="w-full md:w-auto mt-4 md:mt-0">
+              <CountdownTimer expiryDate={subscriptionExpiryDate} />
+            </div>
+          </div>
+          
+          {/* Referral Link */}
+          <div className="mb-6">
+            <ReferralLink />
+          </div>
 
           <Tabs defaultValue="profile">
             <TabsList className="mb-8">
@@ -147,7 +170,7 @@ const Profile = () => {
             </TabsList>
 
             <TabsContent value="profile">
-              <div className="bg-card rounded-lg border border-border p-6">
+              <div className="glass-section p-6">
                 <form onSubmit={handleUpdateProfile}>
                   <div className="space-y-6">
                     <div className="space-y-2">
@@ -182,7 +205,7 @@ const Profile = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="tradingviewId">TradingView Username</Label>
+                      <Label htmlFor="tradingviewId">TrainingView Username</Label>
                       <Input
                         id="tradingviewId"
                         value={tradingviewId}
@@ -191,7 +214,7 @@ const Profile = () => {
                     </div>
 
                     <div className="flex justify-end">
-                      <Button type="submit" disabled={isLoading}>
+                      <Button type="submit" disabled={isLoading} className="glass-button">
                         {isLoading ? 'Saving...' : 'Save Changes'}
                       </Button>
                     </div>
@@ -201,7 +224,7 @@ const Profile = () => {
             </TabsContent>
 
             <TabsContent value="verification">
-              <div className="bg-card rounded-lg border border-border p-6 space-y-8">
+              <div className="glass-section p-6 space-y-8">
                 {/* Email Verification */}
                 <div>
                   <div className="flex justify-between items-center mb-4">
@@ -291,7 +314,7 @@ const Profile = () => {
             </TabsContent>
 
             <TabsContent value="payment">
-              <div className="bg-card rounded-lg border border-border p-6 space-y-6">
+              <div className="glass-section p-6 space-y-6">
                 <h3 className="text-lg font-medium mb-4">Payment Details</h3>
 
                 <div className="space-y-6">
@@ -316,7 +339,7 @@ const Profile = () => {
                   </div>
 
                   <div className="flex justify-end">
-                    <Button type="button" onClick={handleUpdateProfile} disabled={isLoading}>
+                    <Button type="button" onClick={handleUpdateProfile} disabled={isLoading} className="glass-button">
                       {isLoading ? 'Saving...' : 'Save Details'}
                     </Button>
                   </div>

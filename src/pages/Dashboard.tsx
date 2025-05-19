@@ -9,6 +9,9 @@ import { useCountry } from '@/components/CountrySelect';
 import Navbar from '@/components/Navbar';
 import { useToast } from '@/hooks/use-toast';
 import TradingViewWidget from '@/components/TradingViewWidget';
+import CountdownTimer from '@/components/CountdownTimer';
+import ReferralLink from '@/components/ReferralLink';
+import { Timer } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -40,6 +43,9 @@ const Dashboard = () => {
     amount: country === 'in' ? '₹2' : '$0.02',
   };
 
+  // Calculate subscription expiry date (today + 30 days if not available)
+  const subscriptionExpiryDate = user?.subscriptionExpiryDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
       month: 'long',
@@ -49,17 +55,34 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-dark-purple">
+    <div className="min-h-screen flex flex-col bg-brand-dark-purple page-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8 flex-1">
-        <h1 className="text-3xl font-bold mb-8">Welcome, {user?.name || 'User'}</h1>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold">Welcome, {user?.name || 'User'}</h1>
+          {user?.referredBy && (
+            <p className="text-muted-foreground mt-1">
+              Referred by: <span className="text-primary">{user.referredBy}</span>
+            </p>
+          )}
+        </div>
+
+        {/* Subscription Timer */}
+        <div className="mb-6">
+          <CountdownTimer expiryDate={subscriptionExpiryDate} />
+        </div>
+
+        {/* Referral Link */}
+        <div className="mb-6">
+          <ReferralLink />
+        </div>
 
         {/* TradingView Widget */}
-        <Card className="mb-6">
+        <Card className="mb-6 glass-section">
           <CardHeader>
-            <CardTitle>SGSCRIPT.LIFE Market Analysis</CardTitle>
+            <CardTitle>SGSCRIPT.LIFE Training Analysis</CardTitle>
             <CardDescription>
-              Real-time market data and analysis tools
+              Real-time market data and Training analysis tools
             </CardDescription>
           </CardHeader>
           <CardContent className="p-0">
@@ -76,33 +99,39 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Main Content */}
           <div className="md:col-span-8">
-            <Card className="mb-6">
+            <Card className="mb-6 glass-section">
               <CardHeader>
                 <CardTitle>SGSCRIPT</CardTitle>
                 <CardDescription>
-                  Premium Trading View Indicator
+                  Premium Training View Indicator
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col md:flex-row items-center gap-6">
                   <div className="w-full md:w-1/3">
                     <div className="aspect-square bg-card-gradient rounded-lg flex items-center justify-center">
-                      <div className="text-2xl font-bold text-gradient">SGSCRIPT</div>
+                      <img 
+                        src="/lovable-uploads/56d7c40a-054d-4c59-9aa0-7e191c68ff33.png" 
+                        alt="SGSCRIPT Price" 
+                        className="w-full h-full object-contain" 
+                      />
                     </div>
                   </div>
                   <div className="w-full md:w-2/3">
-                    <h3 className="text-xl font-bold mb-2">Advanced Trading Indicator</h3>
+                    <h3 className="text-xl font-bold mb-2">Advanced Training Indicator</h3>
                     <p className="text-muted-foreground mb-4">
-                      SGSCRIPT provides professional-grade trading signals and analysis tools to help you make better trading decisions.
+                      Get access to our premium Training indicators and analytics tools designed to help you improve your Training skills and make data-driven decisions.
                     </p>
                     <div className="flex items-center mb-6">
-                      <div className="text-2xl font-bold mr-2">{formatPrice(10)}</div>
+                      <div className="text-2xl font-bold mr-2">
+                        {country === 'in' ? '₹10.00' : '$10.00'}
+                      </div>
                       <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">
                         Monthly subscription
                       </span>
                     </div>
                     <Button 
-                      className="w-full md:w-auto" 
+                      className="w-full md:w-auto glass-button" 
                       onClick={handleBuyProduct}
                       disabled={hasPurchased}
                     >
@@ -114,7 +143,7 @@ const Dashboard = () => {
             </Card>
 
             {/* Scratch Card */}
-            <Card className="mb-6 overflow-hidden">
+            <Card className="mb-6 overflow-hidden glass-section">
               <div className="bg-card-gradient h-2"></div>
               <CardHeader>
                 <CardTitle>Monthly Rewards</CardTitle>
@@ -154,7 +183,21 @@ const Dashboard = () => {
                       </li>
                       <li>Prizes are credited to your wallet or bank account</li>
                     </ul>
+                    
+                    {/* Referral Scratch Card Note */}
                     <div className="p-3 bg-primary/10 rounded-md">
+                      <p className="text-sm flex items-center">
+                        <Timer size={16} className="mr-2 text-primary" />
+                        <span>
+                          <strong>Bonus:</strong> Get an additional scratch card for every 5 friends you refer!
+                          {user?.referralCount && user.referralCount > 0 ? (
+                            <span className="ml-1">Current referrals: {user.referralCount}/5</span>
+                          ) : null}
+                        </span>
+                      </p>
+                    </div>
+                    
+                    <div className="mt-3 p-3 bg-primary/10 rounded-md">
                       <p className="text-sm">
                         Your next scratch card will be active on <strong>{formatDate(scratchCard.activeDate)}</strong>
                       </p>
@@ -167,7 +210,7 @@ const Dashboard = () => {
 
           {/* Sidebar */}
           <div className="md:col-span-4">
-            <Card className="mb-6">
+            <Card className="mb-6 glass-premium">
               <CardHeader>
                 <CardTitle>Account Status</CardTitle>
               </CardHeader>
@@ -198,7 +241,7 @@ const Dashboard = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Trading View ID</span>
+                    <span className="text-muted-foreground">Training View ID</span>
                     <span>
                       {user?.tradingviewId ? (
                         user.tradingviewId
@@ -207,16 +250,22 @@ const Dashboard = () => {
                       )}
                     </span>
                   </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Referral Count</span>
+                    <span>
+                      {user?.referralCount || 0}
+                    </span>
+                  </div>
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">
-                <Button variant="outline" onClick={() => navigate('/profile')}>
+                <Button variant="outline" onClick={() => navigate('/profile')} className="glass-button">
                   Edit Profile
                 </Button>
               </CardFooter>
             </Card>
 
-            <Card>
+            <Card className="glass-premium">
               <CardHeader>
                 <CardTitle>Need Help?</CardTitle>
               </CardHeader>
@@ -224,7 +273,7 @@ const Dashboard = () => {
                 <p className="text-muted-foreground mb-4">
                   Having issues with your account or product? Our support team is here to help.
                 </p>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full glass-button">
                   Contact Support
                 </Button>
               </CardContent>
