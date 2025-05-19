@@ -4,69 +4,253 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { useLanguage } from '@/components/LanguageSwitch';
+import { useCountry } from '@/components/CountrySelect';
+import { 
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger 
+} from '@/components/ui/accordion';
+import { Card, CardContent } from '@/components/ui/card';
 
-// Feature Card Component
-const FeatureCard = ({
+// Feature Section Component
+const FeatureSection = ({
+  subtitle,
   title,
   description,
+  imageSrc,
+  imageAlt,
+  buttonText,
+  buttonLink,
+  imageOnRight = true,
 }: {
+  subtitle: string;
   title: string;
   description: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  buttonText: string;
+  buttonLink: string;
+  imageOnRight?: boolean;
 }) => (
-  <div className="backdrop-blur-xl bg-black/20 p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all">
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
-    <p className="text-sm text-muted-foreground">{description}</p>
-  </div>
-);
-
-// Stat Card Component
-const StatCard = ({ number, label }: { number: string; label: string }) => (
-  <div className="backdrop-blur-xl bg-black/30 p-4 rounded-lg flex flex-col items-center justify-center border border-white/10">
-    <p className="text-2xl font-bold text-primary">{number}</p>
-    <p className="text-sm text-muted-foreground">{label}</p>
-  </div>
-);
-
-// Testimonial Card Component
-const TestimonialCard = ({
-  name,
-  company,
-  testimonial,
-  imgSrc,
-}: {
-  name: string;
-  company: string;
-  testimonial: string;
-  imgSrc: string;
-}) => (
-  <div className="backdrop-blur-xl bg-black/20 p-6 rounded-xl border border-white/10">
-    <div className="flex items-center mb-4">
-      <div className="w-12 h-12 rounded-full bg-brand-purple flex items-center justify-center mr-4">
-        {imgSrc ? (
-          <img
-            src={imgSrc}
-            alt={name}
-            className="w-full h-full rounded-full object-cover"
-          />
-        ) : (
-          <span className="text-lg font-bold">{name[0]}</span>
-        )}
-      </div>
-      <div>
-        <h4 className="font-semibold">{name}</h4>
-        <p className="text-xs text-muted-foreground">{company}</p>
+  <section className="py-16 relative overflow-hidden">
+    <div className="container mx-auto px-4">
+      <div className={`glass-section p-8 sm:p-12 grid md:grid-cols-2 gap-12 items-center ${imageOnRight ? '' : 'md:flex-row-reverse'}`}>
+        <div className={imageOnRight ? 'order-2' : 'order-1'}>
+          <div className="glass-premium h-64 md:h-96 rounded-xl flex items-center justify-center overflow-hidden">
+            {imageSrc ? (
+              <img src={imageSrc} alt={imageAlt || title} className="w-full h-full object-cover" />
+            ) : (
+              <div className="flex items-center justify-center h-full w-full bg-gradient-to-br from-black/40 to-black/10 p-4">
+                <span className="text-lg font-medium text-white/70">Chart Visualization</span>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={imageOnRight ? 'order-1' : 'order-2'}>
+          <span className="text-sm font-medium text-primary mb-2 block">{subtitle}</span>
+          <h2 className="text-3xl font-bold mb-6">{title}</h2>
+          <p className="mb-8 text-muted-foreground">
+            {description}
+          </p>
+          <Link to={buttonLink}>
+            <Button 
+              className="glass-button rounded-full px-6 py-2"
+              variant="outline"
+            >
+              {buttonText}
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
-    <p className="text-sm">{testimonial}</p>
+  </section>
+);
+
+// Price Card Component
+const PriceCard = ({ country }: { country: string }) => {
+  const isPriceInRupees = country === 'in';
+  
+  return (
+    <div className="glass-premium p-8 rounded-xl border border-white/10 hover:border-white/20 transition-all max-w-md mx-auto">
+      <h3 className="text-xl font-bold mb-2 text-gradient">SGSCRIPT</h3>
+      <div className="flex items-end mb-6">
+        <span className="text-4xl font-bold">
+          {isPriceInRupees ? '₹10' : '$10'}
+        </span>
+        <span className="text-muted-foreground ml-1 mb-1">/month</span>
+      </div>
+      
+      <ul className="space-y-4 mb-8">
+        <li className="flex items-center">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="h-5 w-5 mr-2 text-primary"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>AI-powered trading indicators</span>
+        </li>
+        <li className="flex items-center">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="h-5 w-5 mr-2 text-primary"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Professional-grade screeners</span>
+        </li>
+        <li className="flex items-center">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="h-5 w-5 mr-2 text-primary"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Advanced backtesting tools</span>
+        </li>
+        <li className="flex items-center">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="h-5 w-5 mr-2 text-primary"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>TradingView integration</span>
+        </li>
+        <li className="flex items-center">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="h-5 w-5 mr-2 text-primary"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Real-time market insights</span>
+        </li>
+      </ul>
+      
+      <Link to="/signup">
+        <Button className="w-full rounded-full bg-primary/80 hover:bg-primary/90">
+          Get Started
+        </Button>
+      </Link>
+    </div>
+  );
+};
+
+// FAQ Accordion Component
+const FAQ = () => (
+  <Accordion type="single" collapsible className="w-full max-w-2xl mx-auto">
+    <AccordionItem value="item-1" className="border-white/10">
+      <AccordionTrigger className="text-left">What is SGSCRIPT?</AccordionTrigger>
+      <AccordionContent>
+        SGSCRIPT is a cutting-edge, AI-powered platform that provides automated, tailored indicators to help traders make informed buy and sell decisions with high accuracy—ranging from 70% to 80%.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2" className="border-white/10">
+      <AccordionTrigger className="text-left">How accurate are the trading indicators?</AccordionTrigger>
+      <AccordionContent>
+        Our AI-powered indicators have shown accuracy rates of 70-80% in identifying profitable trading opportunities across various market conditions.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3" className="border-white/10">
+      <AccordionTrigger className="text-left">Can I use SGSCRIPT with TradingView?</AccordionTrigger>
+      <AccordionContent>
+        Yes! SGSCRIPT is fully integrated with TradingView. You can easily connect our indicators directly to your TradingView charts for seamless analysis.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-4" className="border-white/10">
+      <AccordionTrigger className="text-left">Is my data secure with SGSCRIPT?</AccordionTrigger>
+      <AccordionContent>
+        Absolutely. Our system is built on a secure, decentralized architecture that ensures complete privacy and protection of user data. We employ industry-standard encryption protocols to safeguard your information.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-5" className="border-white/10">
+      <AccordionTrigger className="text-left">Can I cancel my subscription anytime?</AccordionTrigger>
+      <AccordionContent>
+        Yes, you can cancel your subscription at any time. We offer a hassle-free cancellation process with no hidden fees or long-term commitments.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+);
+
+// Payment Security Section Component
+const PaymentSecurity = () => (
+  <div className="glass p-8 rounded-xl border border-white/10 max-w-3xl mx-auto">
+    <h3 className="text-2xl font-bold mb-4 text-center">Safe and secure checkout</h3>
+    <p className="text-muted-foreground mb-6 text-center">
+      Cancel anytime in one click from within your account. A link to get instant access is prompted to you directly after signing up. Trade at your own risk.
+    </p>
+    
+    <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
+      <div className="flex items-center bg-white/10 p-2 rounded-md">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 mr-2">
+          <rect width="20" height="14" x="2" y="5" rx="2" />
+          <path d="M2 10h20" />
+        </svg>
+        <span>SECURE</span>
+      </div>
+      <div className="bg-white/10 p-2 rounded-md">Stripe</div>
+      <div className="bg-white/10 p-2 rounded-md">Mastercard</div>
+      <div className="bg-white/10 p-2 rounded-md">Visa</div>
+      <div className="bg-white/10 p-2 rounded-md">American Express</div>
+      <div className="bg-white/10 p-2 rounded-md">PayPal</div>
+    </div>
+    
+    <div className="text-center glass-premium rounded-xl p-6 border border-white/10">
+      <span className="text-3xl font-bold block mb-1">30-day</span>
+      <span className="text-xl">money-back guarantee</span>
+    </div>
   </div>
 );
 
 const Index = () => {
   const { language } = useLanguage();
+  const { country } = useCountry();
 
   const translations = {
     en: {
-      heroTitle: 'QUALITY PRODUCTS FOR QUALITY LIFE.',
+      heroTitle: 'Boost your trading strategy with AI powered indicators',
       heroSubtitle: 'Elevate your trading experience with our premium tools and services',
       getStarted: 'Get Started',
       learnMore: 'Learn More',
@@ -88,9 +272,10 @@ const Index = () => {
       tradesAnalyzed: 'Trades analyzed',
       customersServed: 'Customers served',
       productsDeployed: 'Products deployed',
+      frequentQuestions: 'Frequently Asked Questions',
     },
     hi: {
-      heroTitle: 'गुणवत्ता जीवन के लिए गुणवत्ता उत्पाद।',
+      heroTitle: 'एआई संकेतकों के साथ अपनी ट्रेडिंग रणनीति को बढ़ावा दें',
       heroSubtitle: 'हमारे प्रीमियम टूल्स और सेवाओं के साथ अपने ट्रेडिंग अनुभव को बढ़ाएं',
       getStarted: 'शुरू करें',
       learnMore: 'और जानें',
@@ -112,9 +297,10 @@ const Index = () => {
       tradesAnalyzed: 'विश्लेषित ट्रेड्स',
       customersServed: 'सेवित ग्राहक',
       productsDeployed: 'तैनात उत्पाद',
+      frequentQuestions: 'अक्सर पूछे जाने वाले प्रश्न',
     },
     ur: {
-      heroTitle: 'معیاری زندگی کے لیے معیاری پروڈکٹس۔',
+      heroTitle: 'اے آئی اشاریہ کے ساتھ اپنی ٹریڈنگ حکمت عملی کو فروغ دیں',
       heroSubtitle: 'ہمارے پریمیم ٹولز اور سروسز کے ساتھ اپنے ٹریڈنگ کے تجربے کو بلند کریں',
       getStarted: 'شروع کریں',
       learnMore: 'مزید جانیں',
@@ -136,9 +322,10 @@ const Index = () => {
       tradesAnalyzed: 'تجزیہ شدہ ٹریڈز',
       customersServed: 'خدمت کیے گئے کسٹمرز',
       productsDeployed: 'تعینات کیے گئے پروڈکٹس',
+      frequentQuestions: 'اکثر پوچھے گئے سوالات',
     },
     ar: {
-      heroTitle: 'منتجات عالية الجودة لحياة عالية الجودة.',
+      heroTitle: 'عزز استراتيجية التداول الخاصة بك بمؤشرات مدعومة بالذكاء الاصطناعي',
       heroSubtitle: 'ارتق بتجربة التداول الخاصة بك مع أدواتنا وخدماتنا المتميزة',
       getStarted: 'ابدأ الآن',
       learnMore: 'اعرف المزيد',
@@ -160,6 +347,7 @@ const Index = () => {
       tradesAnalyzed: 'الصفقات التي تم تحليلها',
       customersServed: 'العملاء الذين تمت خدمتهم',
       productsDeployed: 'المنتجات التي تم نشرها',
+      frequentQuestions: 'الأسئلة المتكررة',
     }
   };
 
@@ -187,7 +375,7 @@ const Index = () => {
             </p>
             <div className="flex justify-center gap-4">
               <Link to="/signup">
-                <Button size="lg" className="rounded-full px-8 backdrop-blur-md bg-primary/80 hover:bg-primary/90">
+                <Button size="lg" className="rounded-full px-8 glass-button">
                   {t('getStarted')}
                 </Button>
               </Link>
@@ -205,111 +393,67 @@ const Index = () => {
         <div className="absolute bottom-20 -right-40 w-80 h-80 bg-blue-500/10 rounded-full filter blur-3xl animate-float opacity-30" style={{ animationDelay: "1s" }}></div>
       </section>
 
-      {/* About Section */}
-      <section className="py-16 relative overflow-hidden">
+      {/* Feature Sections */}
+      <FeatureSection
+        subtitle="Pro Toolkits"
+        title="State of the art trading tools"
+        description="Automate complicated price action, get easy signals, and detect reversals by smart money. Our world class toolkits are the best way to level up your TradingView charts."
+        buttonText="Level Up Your Charts"
+        buttonLink="/products"
+        imageOnRight={true}
+      />
+
+      <FeatureSection
+        subtitle="Screeners & Alerts"
+        title="Easily find high probability setups"
+        description="Use professional-grade screeners & alerts with our most exclusive trading algorithms. Filter out market chaos and find trade setups on stocks, crypto, & forex markets."
+        buttonText="Unlock Access"
+        buttonLink="/products"
+        imageOnRight={false}
+      />
+
+      <FeatureSection
+        subtitle="Next-Gen Backtesting"
+        title="An AI agent to build winning strategies"
+        description="Ask our AI agent to find the best trading strategies and do the work for you. Plug our backtesting software into any platform to automate your trades like a pro."
+        buttonText="Get Access Now"
+        buttonLink="/signup"
+        imageOnRight={true}
+      />
+
+      {/* Pricing Section */}
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
-          <div className={`grid md:grid-cols-2 gap-12 items-center ${language === 'ur' || language === 'ar' ? 'rtl' : ''}`}>
-            <div className="order-2 md:order-1">
-              <h2 className="text-3xl font-bold mb-4">{t('aboutTitle')}</h2>
-              <p className="mb-6 text-muted-foreground">
-                {t('aboutText1')}
-              </p>
-              <p className="mb-6 text-muted-foreground">
-                {t('aboutText2')}
-              </p>
-              <Link to="/about">
-                <Button variant="outline" className="backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10">{t('learnMore')}</Button>
-              </Link>
-            </div>
-            <div className="order-1 md:order-2 relative">
-              <div className="h-64 md:h-96 backdrop-blur-xl bg-black/20 rounded-xl flex items-center justify-center animate-float border border-white/10">
-                <div className="glowing-ring p-8 rounded-full">
-                  <div className="text-4xl font-bold text-gradient">SGSCRIPT</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold mb-10 text-center">Pricing</h2>
+          <PriceCard country={country} />
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Payment Security Section */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-10 text-center">{t('whyChooseUs')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <FeatureCard
-              title={t('feature1Title')}
-              description={t('feature1Desc')}
-            />
-            <FeatureCard
-              title={t('feature2Title')}
-              description={t('feature2Desc')}
-            />
-            <FeatureCard
-              title={t('feature3Title')}
-              description={t('feature3Desc')}
-            />
-          </div>
+          <PaymentSecurity />
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* FAQ Section */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-10 text-center">{t('whatWeveDone')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <StatCard number="10,403" label={t('tradesAnalyzed')} />
-            <StatCard number="927" label={t('customersServed')} />
-            <StatCard number="658" label={t('productsDeployed')} />
-          </div>
+          <h2 className="text-3xl font-bold mb-10 text-center">{t('frequentQuestions')}</h2>
+          <FAQ />
         </div>
-
-        {/* Animated Background Elements */}
-        <div className="absolute top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full filter blur-3xl opacity-30"></div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-16 relative">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            {t('hearFromClients')}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <TestimonialCard
-              name="Dempsey and Delta"
-              company="Trading Firm"
-              testimonial="SGSCRIPT has completely transformed our trading strategy. The accuracy of the signals is impressive and has greatly improved our success rate."
-              imgSrc=""
-            />
-            <TestimonialCard
-              name="Noah Schumacher"
-              company="Individual Trader"
-              testimonial="As someone new to trading, SGSCRIPT has been a game changer. The indicators are easy to understand and have helped me make more confident decisions."
-              imgSrc=""
-            />
-            <TestimonialCard
-              name="Stipple Unlimited"
-              company="Investment Group"
-              testimonial="The AI-powered indicators from SGSCRIPT have given us an edge in the market. Their monthly scratch card rewards are a nice bonus too!"
-              imgSrc=""
-            />
-          </div>
-        </div>
-
-        {/* Animated Background Elements */}
-        <div className="absolute bottom-10 -left-20 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl opacity-30"></div>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4 text-center">
-          <div className="backdrop-blur-xl bg-black/30 p-8 md:p-12 rounded-2xl border border-white/10 max-w-3xl mx-auto">
+          <div className="glass-section p-8 md:p-12 max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">{t('readyToWork')}</h2>
             <p className="mb-8 max-w-lg mx-auto text-muted-foreground">
               {t('readySubtext')}
             </p>
             <Link to="/signup">
-              <Button size="lg" className="rounded-full px-8 backdrop-blur-md bg-primary/80 hover:bg-primary/90">
+              <Button size="lg" className="rounded-full px-8 glass-button">
                 {t('signUpNow')}
               </Button>
             </Link>
@@ -340,6 +484,11 @@ const Index = () => {
           </div>
           <div className="text-center mt-8 text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} SGSCRIPT. All rights reserved.
+          </div>
+          <div className="text-center mt-4 text-xs text-muted-foreground max-w-3xl mx-auto">
+            <p className="italic">
+              Disclaimer: Trading involves significant risk and is not suitable for everyone. The information provided is for educational purposes only and is not investment advice. Past performance is not indicative of future results. Users are responsible for their trading decisions. SGSCRIPT does not guarantee specific results and is not liable for any losses incurred.
+            </p>
           </div>
         </div>
       </footer>

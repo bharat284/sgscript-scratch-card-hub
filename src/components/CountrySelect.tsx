@@ -46,9 +46,8 @@ export const CountrySelect: React.FC<{ className?: string }> = ({ className }) =
 
   return (
     <Select
-      value={country}
+      defaultValue={country}
       onValueChange={(value) => setCountry(value as Country)}
-      className={className}
     >
       <SelectTrigger className="w-[90px]">
         <SelectValue placeholder="Country" />
