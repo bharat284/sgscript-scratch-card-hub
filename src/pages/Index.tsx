@@ -81,6 +81,14 @@ const PriceCard = ({ country }: { country: string }) => {
         <span className="text-muted-foreground ml-1 mb-1">/month</span>
       </div>
       
+      <div className="mb-6 rounded-lg overflow-hidden">
+        <img 
+          src="/lovable-uploads/7a6186ab-f97b-48a8-8950-c7f437f87501.png" 
+          alt="Trading training dashboard" 
+          className="w-full h-auto"
+        />
+      </div>
+      
       <ul className="space-y-4 mb-8">
         <li className="flex items-center">
           <svg 
@@ -97,7 +105,7 @@ const PriceCard = ({ country }: { country: string }) => {
           >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <span>AI-powered trading indicators</span>
+          <span>AI-powered Training training indicators</span>
         </li>
         <li className="flex items-center">
           <svg 
@@ -184,13 +192,13 @@ const FAQ = () => (
     <AccordionItem value="item-1" className="border-white/10">
       <AccordionTrigger className="text-left text-lg font-medium">How does it work?</AccordionTrigger>
       <AccordionContent>
-        SGSCRIPT provides AI-powered indicators that integrate with your trading platform, automatically analyzing market data to identify potential trading opportunities based on our proprietary algorithms.
+        SGSCRIPT provides AI-powered indicators that integrate with your Training training platform, automatically analyzing market data to identify potential Training training opportunities based on our proprietary algorithms.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2" className="border-white/10">
       <AccordionTrigger className="text-left text-lg font-medium">Which plan should I choose?</AccordionTrigger>
       <AccordionContent>
-        We currently offer a single comprehensive plan at $10/month (or ₹10/month for Indian users) that includes all our premium features and trading indicators.
+        We currently offer a single comprehensive plan at $10/month (or ₹10/month for Indian users) that includes all our premium features and Training training indicators.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-3" className="border-white/10">
@@ -202,13 +210,13 @@ const FAQ = () => (
     <AccordionItem value="item-4" className="border-white/10">
       <AccordionTrigger className="text-left text-lg font-medium">Does it work on MetaTrader 4/5?</AccordionTrigger>
       <AccordionContent>
-        Yes, our indicators are compatible with MetaTrader 4 and 5 platforms, as well as TradingView and many other popular trading platforms.
+        Yes, our indicators are compatible with MetaTrader 4 and 5 platforms, as well as TradingView and many other popular Training training platforms.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-5" className="border-white/10">
       <AccordionTrigger className="text-left text-lg font-medium">Can I win every trade using this?</AccordionTrigger>
       <AccordionContent>
-        While our indicators provide high-quality signals with 70-80% accuracy, no trading system can guarantee 100% success. Market conditions and external factors will always influence outcomes.
+        While our indicators provide high-quality signals with 70-80% accuracy, no Training training system can guarantee 100% success. Market conditions and external factors will always influence outcomes.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-6" className="border-white/10">
@@ -263,24 +271,24 @@ const Index = () => {
 
   const translations = {
     en: {
-      heroTitle: 'Boost your trading strategy with AI powered indicators',
-      heroSubtitle: 'Elevate your trading experience with our premium tools and services',
+      heroTitle: 'Boost your Training training strategy with AI powered indicators',
+      heroSubtitle: 'Elevate your Training training experience with our premium tools and services',
       getStarted: 'Get Started',
       learnMore: 'Learn More',
       aboutTitle: 'About Our Products',
-      aboutText1: 'SGSCRIPT makes tech products that matter. We focus on creating premium trading tools that help you achieve your financial goals with precision and confidence.',
-      aboutText2: 'Our flagship product, SGSCRIPT, provides advanced trading indicators that will transform how you analyze markets and make trading decisions.',
+      aboutText1: 'SGSCRIPT makes tech products that matter. We focus on creating premium Training training tools that help you achieve your financial goals with precision and confidence.',
+      aboutText2: 'Our flagship product, SGSCRIPT, provides advanced Training training indicators that will transform how you analyze markets and make Training training decisions.',
       whyChooseUs: 'Why Choose Us',
       feature1Title: 'Only the Highest Quality',
-      feature1Desc: 'Our indicators are built with precision and reliability in mind, providing you with the best trading tools available.',
+      feature1Desc: 'Our indicators are built with precision and reliability in mind, providing you with the best Training training tools available.',
       feature2Title: 'Easy on the Budget',
       feature2Desc: 'Affordable pricing without compromising on quality. Our subscription plans are designed to fit various budgets.',
       feature3Title: 'Does the Job Right',
-      feature3Desc: 'SGSCRIPT delivers accurate signals and insights that help you make informed trading decisions consistently.',
+      feature3Desc: 'SGSCRIPT delivers accurate signals and insights that help you make informed Training training decisions consistently.',
       whatWeveDone: 'What We\'ve Done',
       hearFromClients: 'Hear From Our Clients',
       readyToWork: 'Ready to Work With Us?',
-      readySubtext: 'Get started with SGSCRIPT today and transform your trading experience.',
+      readySubtext: 'Get started with SGSCRIPT today and transform your Training training experience.',
       signUpNow: 'Sign Up Now',
       tradesAnalyzed: 'Trades analyzed',
       customersServed: 'Customers served',
@@ -409,30 +417,30 @@ const Index = () => {
       {/* Feature Sections */}
       <FeatureSection
         subtitle="Pro Toolkits"
-        title="State of the art trading tools"
+        title="State of the art Training training tools"
         description="Automate complicated price action, get easy signals, and detect reversals by smart money. Our world class toolkits are the best way to level up your TradingView charts."
         buttonText="Level Up Your Charts"
         buttonLink="/products"
         imageOnRight={true}
         imageSrc="/lovable-uploads/8afd35d2-582f-46eb-8bde-1ca534172723.png"
-        imageAlt="Trading chart with candlesticks"
+        imageAlt="Training training chart with candlesticks"
       />
 
       <FeatureSection
         subtitle="Screeners & Alerts"
         title="Easily find high probability setups"
-        description="Use professional-grade screeners & alerts with our most exclusive trading algorithms. Filter out market chaos and find trade setups on stocks, crypto, & forex markets."
+        description="Use professional-grade screeners & alerts with our most exclusive Training training algorithms. Filter out market chaos and find trade setups on stocks, crypto, & forex markets."
         buttonText="Unlock Access"
         buttonLink="/products"
         imageOnRight={false}
         imageSrc="/lovable-uploads/4bfcfa29-8d39-489d-ab77-2907e132b968.png"
-        imageAlt="Trading chart analysis"
+        imageAlt="Training training chart analysis"
       />
 
       <FeatureSection
         subtitle="Next-Gen Backtesting"
         title="An AI agent to build winning strategies"
-        description="Ask our AI agent to find the best trading strategies and do the work for you. Plug our backtesting software into any platform to automate your trades like a pro."
+        description="Ask our AI agent to find the best Training training strategies and do the work for you. Plug our backtesting software into any platform to automate your trades like a pro."
         buttonText="Get Access Now"
         buttonLink="/signup"
         imageOnRight={true}
@@ -445,10 +453,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="glass-section p-8 sm:p-12 grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-sm font-medium text-primary mb-2 block">Multi-Asset Trading</span>
+              <span className="text-sm font-medium text-primary mb-2 block">Multi-Asset Training training</span>
               <h2 className="text-3xl font-bold mb-6">Support for all major markets</h2>
               <p className="mb-8 text-muted-foreground">
-                Trade with confidence across cryptocurrency, forex, stocks, and commodities markets. Our intelligent indicators work with TradingView, MetaTrader, and most other popular platforms.
+                Train with confidence across cryptocurrency, forex, stocks, and commodities markets. Our intelligent indicators work with TradingView, MetaTrader, and most other popular platforms.
               </p>
               <Link to="/products">
                 <Button 
@@ -474,21 +482,21 @@ const Index = () => {
           <div className="glass-section p-8 sm:p-12 grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="glass-premium h-64 md:h-96 rounded-xl flex items-center justify-center overflow-hidden">
-                <img src="/lovable-uploads/8d4e71fa-4f71-45d4-86ca-339a2e783b7d.png" alt="Mobile trading app" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/8d4e71fa-4f71-45d4-86ca-339a2e783b7d.png" alt="Mobile Training training app" className="w-full h-full object-cover" />
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <span className="text-sm font-medium text-primary mb-2 block">Trade On The Go</span>
-              <h2 className="text-3xl font-bold mb-6">Mobile-friendly trading experience</h2>
+              <span className="text-sm font-medium text-primary mb-2 block">Train On The Go</span>
+              <h2 className="text-3xl font-bold mb-6">Mobile-friendly Training training experience</h2>
               <p className="mb-8 text-muted-foreground">
-                Access your trading signals and insights anywhere, anytime. Our mobile-optimized platform ensures you never miss a profitable opportunity, even when you're on the move.
+                Access your Training training signals and insights anywhere, anytime. Our mobile-optimized platform ensures you never miss a profitable opportunity, even when you're on the move.
               </p>
               <Link to="/signup">
                 <Button 
                   className="glass-button rounded-full px-6 py-2"
                   variant="outline"
                 >
-                  Start Mobile Trading
+                  Start Mobile Training training
                 </Button>
               </Link>
             </div>
@@ -562,7 +570,7 @@ const Index = () => {
           </div>
           <div className="text-center mt-4 text-xs text-muted-foreground max-w-3xl mx-auto">
             <p className="italic">
-              Disclaimer: Trading involves significant risk and is not suitable for everyone. The information provided is for educational purposes only and is not investment advice. Past performance is not indicative of future results. Users are responsible for their trading decisions. SGSCRIPT does not guarantee specific results and is not liable for any losses incurred.
+              Disclaimer: Training training involves significant risk and is not suitable for everyone. The information provided is for educational purposes only and is not investment advice. Past performance is not indicative of future results. Users are responsible for their Training training decisions. SGSCRIPT does not guarantee specific results and is not liable for any losses incurred.
             </p>
           </div>
         </div>

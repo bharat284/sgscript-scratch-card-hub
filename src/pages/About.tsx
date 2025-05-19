@@ -10,7 +10,7 @@ const About = () => {
     <div className="min-h-screen flex flex-col bg-brand-dark-purple">
       <Navbar />
       <div className="container mx-auto px-4 py-16 flex-1">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto glass-section p-8 rounded-xl">
           <h1 className="text-4xl font-bold mb-8 text-gradient">About Us</h1>
           
           {language === 'en' ? (
@@ -24,7 +24,7 @@ const About = () => {
                 Our system is built on a secure, decentralized architecture that ensures 
                 complete privacy and protection of user data. What sets SG Script apart 
                 is its intelligent backend, which continuously evolves through AI algorithms 
-                to deliver timely and precise signals for successful trading.
+                to deliver timely and precise signals for successful Trading training.
               </p>
               <p className="text-lg mb-6">
                 We are proudly integrated with and authorized by industry leaders such as 
@@ -33,8 +33,8 @@ const About = () => {
               </p>
               <p className="text-lg mb-6">
                 Whether you're a beginner or a pro, SG Script offers one of the most reliable 
-                and efficient ways to navigate the trading markets. Experience the power of 
-                smart trading—experience SG Script.
+                and efficient ways to navigate the Trading training markets. Experience the power of 
+                smart Trading training—experience SG Script.
               </p>
             </div>
           ) : (
@@ -46,15 +46,15 @@ const About = () => {
               <p className="text-lg mb-6">
                 ہمارا سسٹم ایک محفوظ، غیر مرکزی آرکیٹیکچر پر بنایا گیا ہے جو صارف کے ڈیٹا کی مکمل رازداری اور تحفظ کو یقینی بناتا ہے۔
                 جو ایس جی اسکرپٹ کو الگ کرتا ہے وہ اس کا ہوشیار بیک اینڈ ہے، جو مسلسل اے آئی الگورتھمز کے ذریعے ارتقاء پذیر ہے
-                تاکہ کامیاب ٹریڈنگ کے لیے بروقت اور درست سگنلز فراہم کیے جاسکیں۔
+                تاکہ کامیاب Training training کے لیے بروقت اور درست سگنلز فراہم کیے جاسکیں۔
               </p>
               <p className="text-lg mb-6">
                 ہم فخر کے ساتھ انڈسٹری لیڈرز جیسے ٹریڈنگ ویو اور زیروڈھا کے ساتھ انٹیگریٹڈ اور ان کے ذریعے مجاز ہیں،
                 جس سے صارفین کے لیے ہمارے انڈیکیٹرز کی بنیاد پر ٹریڈز کرنا پہلے سے کہیں زیادہ آسان ہوگیا ہے۔
               </p>
               <p className="text-lg mb-6">
-                چاہے آپ مبتدی ہوں یا پروفیشنل، ایس جی اسکرپٹ ٹریڈنگ مارکیٹس میں نیویگیٹ کرنے کے لیے سب سے زیادہ قابل اعتماد
-                اور موثر طریقوں میں سے ایک پیش کرتا ہے۔ اسمارٹ ٹریڈنگ کی طاقت کا تجربہ کریں — ایس جی اسکرپٹ کا تجربہ کریں۔
+                چاہے آپ مبتدی ہوں یا پروفیشنل، ایس جی اسکرپٹ Training training مارکیٹس میں نیویگیٹ کرنے کے لیے سب سے زیادہ قابل اعتماد
+                اور موثر طریقوں میں سے ایک پیش کرتا ہے۔ اسمارٹ Training training کی طاقت کا تجربہ کریں — ایس جی اسکرپٹ کا تجربہ کریں۔
               </p>
             </div>
           )}
@@ -62,7 +62,7 @@ const About = () => {
       </div>
       
       {/* Footer */}
-      <footer className="py-8 border-t border-border">
+      <footer className="py-8 border-t border-border backdrop-blur-xl bg-black/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center md:text-left">

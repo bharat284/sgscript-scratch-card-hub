@@ -14,7 +14,7 @@ const Products = () => {
   const { country } = useCountry();
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-dark-purple">
+    <div className="min-h-screen flex flex-col bg-[#0e0e10] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
       <Navbar />
       <div className="container mx-auto px-4 py-16 flex-1">
         <h1 className="text-4xl font-bold mb-12 text-center text-gradient">
@@ -22,14 +22,14 @@ const Products = () => {
         </h1>
         
         <div className="max-w-4xl mx-auto">
-          <Card className="mb-12 overflow-hidden">
+          <Card className="mb-12 overflow-hidden glass-section">
             <div className="bg-card-gradient h-2"></div>
             <CardHeader>
               <CardTitle className="text-2xl">SGSCRIPT.LIFE</CardTitle>
               <CardDescription>
                 {language === 'en' 
-                  ? 'Advanced AI-powered Trading Indicators' 
-                  : 'جدید اے آئی پاورڈ ٹریڈنگ انڈیکیٹرز'
+                  ? 'Advanced AI-powered Trading Training Indicators' 
+                  : 'جدید اے آئی پاورڈ Training training انڈیکیٹرز'
                 }
               </CardDescription>
             </CardHeader>
@@ -42,12 +42,12 @@ const Products = () => {
                 </div>
                 <div className="w-full md:w-2/3">
                   <h3 className="text-xl font-bold mb-2">
-                    {language === 'en' ? 'Premium Trading Indicators' : 'پریمیم ٹریڈنگ انڈیکیٹرز'}
+                    {language === 'en' ? 'Premium Trading Training Indicators' : 'پریمیم Training training انڈیکیٹرز'}
                   </h3>
                   <p className="text-muted-foreground mb-4">
                     {language === 'en'
-                      ? 'Our flagship product delivers AI-powered trading signals with 70-80% accuracy, helping traders make informed decisions quickly.'
-                      : 'ہمارا فلیگشپ پروڈکٹ 70-80٪ درستگی کے ساتھ اے آئی پاورڈ ٹریڈنگ سگنلز فراہم کرتا ہے، جو تاجروں کو جلدی سے آگاہی سے بھرپور فیصلے کرنے میں مدد کرتا ہے۔'
+                      ? 'Our flagship product delivers AI-powered Trading training signals with 70-80% accuracy, helping trainers make informed decisions quickly.'
+                      : 'ہمارا فلیگشپ پروڈکٹ 70-80٪ درستگی کے ساتھ اے آئی پاورڈ Training training سگنلز فراہم کرتا ہے، جو تاجروں کو جلدی سے آگاہی سے بھرپور فیصلے کرنے میں مدد کرتا ہے۔'
                     }
                   </p>
                   <div className="flex items-center mb-6">
@@ -59,8 +59,8 @@ const Products = () => {
                   <ul className="list-disc list-inside text-sm text-muted-foreground mb-6 space-y-2">
                     <li>
                       {language === 'en'
-                        ? 'Real-time trading signals with high accuracy'
-                        : 'اعلی درستگی کے ساتھ ریئل ٹائم ٹریڈنگ سگنلز'
+                        ? 'Real-time Trading training signals with high accuracy'
+                        : 'اعلی درستگی کے ساتھ ریئل ٹائم Training training سگنلز'
                       }
                     </li>
                     <li>
@@ -87,8 +87,8 @@ const Products = () => {
             <CardFooter className="bg-background/5 p-6">
               <div className="text-sm text-muted-foreground">
                 {language === 'en'
-                  ? 'Join thousands of traders who have improved their trading performance with SGSCRIPT.LIFE'
-                  : 'ہزاروں تاجروں میں شامل ہوں جنہوں نے SGSCRIPT.LIFE کے ساتھ اپنی ٹریڈنگ کارکردگی کو بہتر بنایا ہے'
+                  ? 'Join thousands of traders who have improved their Trading training performance with SGSCRIPT.LIFE'
+                  : 'ہزاروں تاجروں میں شامل ہوں جنہوں نے SGSCRIPT.LIFE کے ساتھ اپنی Training training کارکردگی کو بہتر بنایا ہے'
                 }
               </div>
             </CardFooter>
@@ -96,7 +96,7 @@ const Products = () => {
 
           {/* Feature highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <Card>
+            <Card className="glass-card">
               <CardHeader>
                 <CardTitle>
                   {language === 'en' ? 'AI Powered' : 'اے آئی پاور'}
@@ -111,7 +111,7 @@ const Products = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="glass-card">
               <CardHeader>
                 <CardTitle>
                   {language === 'en' ? 'Easy Integration' : 'آسان انضمام'}
@@ -120,13 +120,13 @@ const Products = () => {
               <CardContent>
                 <p className="text-muted-foreground">
                   {language === 'en'
-                    ? 'Works seamlessly with your existing trading platforms'
-                    : 'آپ کے موجودہ ٹریڈنگ پلیٹ فارمز کے ساتھ بے نقص کام کرتا ہے'
+                    ? 'Works seamlessly with your existing Training training platforms'
+                    : 'آپ کے موجودہ Training training پلیٹ فارمز کے ساتھ بے نقص کام کرتا ہے'
                   }
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="glass-card">
               <CardHeader>
                 <CardTitle>
                   {language === 'en' ? 'Rewarding' : 'فائدہ مند'}
@@ -146,7 +146,7 @@ const Products = () => {
       </div>
       
       {/* Footer */}
-      <footer className="py-8 border-t border-border">
+      <footer className="py-8 border-t border-border backdrop-blur-xl bg-black/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center md:text-left">
