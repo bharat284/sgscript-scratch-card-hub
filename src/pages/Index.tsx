@@ -180,35 +180,53 @@ const PriceCard = ({ country }: { country: string }) => {
 
 // FAQ Accordion Component
 const FAQ = () => (
-  <Accordion type="single" collapsible className="w-full max-w-2xl mx-auto">
+  <Accordion type="single" collapsible className="w-full max-w-2xl mx-auto glass-section p-6">
     <AccordionItem value="item-1" className="border-white/10">
-      <AccordionTrigger className="text-left">What is SGSCRIPT?</AccordionTrigger>
+      <AccordionTrigger className="text-left text-lg font-medium">How does it work?</AccordionTrigger>
       <AccordionContent>
-        SGSCRIPT is a cutting-edge, AI-powered platform that provides automated, tailored indicators to help traders make informed buy and sell decisions with high accuracy—ranging from 70% to 80%.
+        SGSCRIPT provides AI-powered indicators that integrate with your trading platform, automatically analyzing market data to identify potential trading opportunities based on our proprietary algorithms.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2" className="border-white/10">
-      <AccordionTrigger className="text-left">How accurate are the trading indicators?</AccordionTrigger>
+      <AccordionTrigger className="text-left text-lg font-medium">Which plan should I choose?</AccordionTrigger>
       <AccordionContent>
-        Our AI-powered indicators have shown accuracy rates of 70-80% in identifying profitable trading opportunities across various market conditions.
+        We currently offer a single comprehensive plan at $10/month (or ₹10/month for Indian users) that includes all our premium features and trading indicators.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-3" className="border-white/10">
-      <AccordionTrigger className="text-left">Can I use SGSCRIPT with TradingView?</AccordionTrigger>
+      <AccordionTrigger className="text-left text-lg font-medium">What markets are supported?</AccordionTrigger>
       <AccordionContent>
-        Yes! SGSCRIPT is fully integrated with TradingView. You can easily connect our indicators directly to your TradingView charts for seamless analysis.
+        SGSCRIPT supports a wide range of markets including stocks, forex, cryptocurrencies, commodities, and futures, allowing you to apply our indicators across different asset classes.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-4" className="border-white/10">
-      <AccordionTrigger className="text-left">Is my data secure with SGSCRIPT?</AccordionTrigger>
+      <AccordionTrigger className="text-left text-lg font-medium">Does it work on MetaTrader 4/5?</AccordionTrigger>
       <AccordionContent>
-        Absolutely. Our system is built on a secure, decentralized architecture that ensures complete privacy and protection of user data. We employ industry-standard encryption protocols to safeguard your information.
+        Yes, our indicators are compatible with MetaTrader 4 and 5 platforms, as well as TradingView and many other popular trading platforms.
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-5" className="border-white/10">
-      <AccordionTrigger className="text-left">Can I cancel my subscription anytime?</AccordionTrigger>
+      <AccordionTrigger className="text-left text-lg font-medium">Can I win every trade using this?</AccordionTrigger>
       <AccordionContent>
-        Yes, you can cancel your subscription at any time. We offer a hassle-free cancellation process with no hidden fees or long-term commitments.
+        While our indicators provide high-quality signals with 70-80% accuracy, no trading system can guarantee 100% success. Market conditions and external factors will always influence outcomes.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-6" className="border-white/10">
+      <AccordionTrigger className="text-left text-lg font-medium">How do discounts work?</AccordionTrigger>
+      <AccordionContent>
+        We occasionally offer promotional discounts to new and existing customers. Keep an eye on our website or subscribe to our newsletter to be informed about special offers.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-7" className="border-white/10">
+      <AccordionTrigger className="text-left text-lg font-medium">Is this friendly for beginners?</AccordionTrigger>
+      <AccordionContent>
+        Absolutely! Our tools are designed with intuitive interfaces suitable for traders of all experience levels, and we provide comprehensive documentation and support to help beginners get started.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-8" className="border-white/10">
+      <AccordionTrigger className="text-left text-lg font-medium">Can I change my plan anytime?</AccordionTrigger>
+      <AccordionContent>
+        Yes, you can upgrade, downgrade, or cancel your subscription at any time through your account dashboard with no hidden fees or long-term commitments.
       </AccordionContent>
     </AccordionItem>
   </Accordion>
@@ -235,11 +253,6 @@ const PaymentSecurity = () => (
       <div className="bg-white/10 p-2 rounded-md">Visa</div>
       <div className="bg-white/10 p-2 rounded-md">American Express</div>
       <div className="bg-white/10 p-2 rounded-md">PayPal</div>
-    </div>
-    
-    <div className="text-center glass-premium rounded-xl p-6 border border-white/10">
-      <span className="text-3xl font-bold block mb-1">30-day</span>
-      <span className="text-xl">money-back guarantee</span>
     </div>
   </div>
 );
@@ -401,6 +414,8 @@ const Index = () => {
         buttonText="Level Up Your Charts"
         buttonLink="/products"
         imageOnRight={true}
+        imageSrc="/lovable-uploads/8afd35d2-582f-46eb-8bde-1ca534172723.png"
+        imageAlt="Trading chart with candlesticks"
       />
 
       <FeatureSection
@@ -410,6 +425,8 @@ const Index = () => {
         buttonText="Unlock Access"
         buttonLink="/products"
         imageOnRight={false}
+        imageSrc="/lovable-uploads/4bfcfa29-8d39-489d-ab77-2907e132b968.png"
+        imageAlt="Trading chart analysis"
       />
 
       <FeatureSection
@@ -419,7 +436,65 @@ const Index = () => {
         buttonText="Get Access Now"
         buttonLink="/signup"
         imageOnRight={true}
+        imageSrc="/lovable-uploads/56d7c40a-054d-4c59-9aa0-7e191c68ff33.png"
+        imageAlt="3D cube visualization"
       />
+
+      {/* Crypto & Multi-Asset Support */}
+      <section className="py-16 relative">
+        <div className="container mx-auto px-4">
+          <div className="glass-section p-8 sm:p-12 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-sm font-medium text-primary mb-2 block">Multi-Asset Trading</span>
+              <h2 className="text-3xl font-bold mb-6">Support for all major markets</h2>
+              <p className="mb-8 text-muted-foreground">
+                Trade with confidence across cryptocurrency, forex, stocks, and commodities markets. Our intelligent indicators work with TradingView, MetaTrader, and most other popular platforms.
+              </p>
+              <Link to="/products">
+                <Button 
+                  className="glass-button rounded-full px-6 py-2"
+                  variant="outline"
+                >
+                  Explore Markets
+                </Button>
+              </Link>
+            </div>
+            <div>
+              <div className="glass-premium h-64 md:h-96 rounded-xl flex items-center justify-center overflow-hidden">
+                <img src="/lovable-uploads/4121a438-66d6-42e2-b48a-135238731245.png" alt="Crypto wallet and currency symbols" className="w-full h-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile Trading */}
+      <section className="py-16 relative">
+        <div className="container mx-auto px-4">
+          <div className="glass-section p-8 sm:p-12 grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="glass-premium h-64 md:h-96 rounded-xl flex items-center justify-center overflow-hidden">
+                <img src="/lovable-uploads/8d4e71fa-4f71-45d4-86ca-339a2e783b7d.png" alt="Mobile trading app" className="w-full h-full object-cover" />
+              </div>
+            </div>
+            <div className="order-1 md:order-2">
+              <span className="text-sm font-medium text-primary mb-2 block">Trade On The Go</span>
+              <h2 className="text-3xl font-bold mb-6">Mobile-friendly trading experience</h2>
+              <p className="mb-8 text-muted-foreground">
+                Access your trading signals and insights anywhere, anytime. Our mobile-optimized platform ensures you never miss a profitable opportunity, even when you're on the move.
+              </p>
+              <Link to="/signup">
+                <Button 
+                  className="glass-button rounded-full px-6 py-2"
+                  variant="outline"
+                >
+                  Start Mobile Trading
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Pricing Section */}
       <section className="py-16 relative">
