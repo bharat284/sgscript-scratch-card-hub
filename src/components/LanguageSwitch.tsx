@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type Language = 'en' | 'ur';
+type Language = 'en' | 'hi' | 'ur' | 'ar';
 
 interface LanguageContextType {
   language: Language;
@@ -26,6 +26,14 @@ const translations: Record<Language, Record<string, string>> = {
     login: 'Login',
     signup: 'Sign Up',
   },
+  hi: {
+    home: 'होम',
+    about: 'हमारे बारे में',
+    products: 'उत्पाद',
+    contact: 'संपर्क',
+    login: 'लॉग इन',
+    signup: 'साइन अप',
+  },
   ur: {
     home: 'ہوم',
     about: 'ہمارے بارے میں',
@@ -33,6 +41,14 @@ const translations: Record<Language, Record<string, string>> = {
     contact: 'رابطہ',
     login: 'لاگ ان',
     signup: 'سائن اپ',
+  },
+  ar: {
+    home: 'الرئيسية',
+    about: 'عن الشركة',
+    products: 'المنتجات',
+    contact: 'اتصل بنا',
+    login: 'تسجيل الدخول',
+    signup: 'التسجيل',
   },
 };
 
@@ -66,12 +82,14 @@ export const LanguageSwitch: React.FC = () => {
       value={language}
       onValueChange={(value) => setLanguage(value as Language)}
     >
-      <SelectTrigger className="w-[70px]">
+      <SelectTrigger className="w-[80px]">
         <SelectValue placeholder="Language" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="en">EN</SelectItem>
-        <SelectItem value="ur">UR</SelectItem>
+        <SelectItem value="en">ENG</SelectItem>
+        <SelectItem value="hi">HINDI</SelectItem>
+        <SelectItem value="ur">URDU</SelectItem>
+        <SelectItem value="ar">ARABIC</SelectItem>
       </SelectContent>
     </Select>
   );

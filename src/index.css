@@ -76,6 +76,32 @@
   }
 }
 
+/* Glassmorphism */
+.glass {
+  @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-lg;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-black/20 border border-white/10 rounded-lg shadow-lg hover:border-white/20 transition-all;
+}
+
+/* Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -84,4 +110,23 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7);
 }

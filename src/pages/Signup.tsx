@@ -7,35 +7,92 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
+import PhoneInput from '@/components/PhoneInput';
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+  confirmPassword?: string;
+}
 
 const Signup = () => {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
   
   const { signup } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    let isValid = true;
+
+    if (!firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+      isValid = false;
+    }
+
+    if (!lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+      isValid = false;
+    }
+
+    if (!email) {
+      newErrors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid';
+      isValid = false;
+    }
+
+    if (!phone) {
+      newErrors.phone = 'Phone number is required';
+      isValid = false;
+    } else if (phone.length < 10) {
+      newErrors.phone = 'Phone number is too short';
+      isValid = false;
+    }
+
+    if (!password) {
+      newErrors.password = 'Password is required';
+      isValid = false;
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (password !== confirmPassword) {
-      toast({
-        title: 'Passwords do not match',
-        description: 'Please make sure your passwords match',
-        variant: 'destructive',
-      });
+    if (!validateForm()) {
       return;
     }
     
     setIsLoading(true);
 
     try {
-      await signup(email, password, name, phone);
+      const fullName = `${firstName} ${lastName}`;
+      const fullPhone = `${countryCode}${phone}`;
+      await signup(email, password, fullName, fullPhone);
       toast({
         title: 'Account created',
         description: 'Your account has been created successfully!',
@@ -52,27 +109,51 @@ const Signup = () => {
     }
   };
 
+  const handlePhoneChange = (phoneNumber: string, code: string) => {
+    setPhone(phoneNumber);
+    setCountryCode(code);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-brand-dark-purple">
       <Navbar />
       <div className="flex-1 flex items-center justify-center py-12">
-        <div className="w-full max-w-md p-8 bg-card rounded-lg shadow-lg border border-border">
+        <div className="w-full max-w-md p-8 backdrop-blur-xl bg-black/20 rounded-lg shadow-lg border border-white/10">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold">Create Account</h1>
+            <h1 className="text-3xl font-bold text-gradient">Create Account</h1>
             <p className="text-muted-foreground mt-2">Sign up to get started</p>
           </div>
 
           <form onSubmit={handleSubmit}>
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  placeholder="John Doe"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input
+                    id="firstName"
+                    placeholder="John"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className={errors.firstName ? "border-red-500" : ""}
+                  />
+                  {errors.firstName && (
+                    <p className="text-xs text-red-500">{errors.firstName}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    id="lastName"
+                    placeholder="Doe"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className={errors.lastName ? "border-red-500" : ""}
+                  />
+                  {errors.lastName && (
+                    <p className="text-xs text-red-500">{errors.lastName}</p>
+                  )}
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -83,19 +164,19 @@ const Signup = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
+                  className={errors.email ? "border-red-500" : ""}
                 />
+                {errors.email && (
+                  <p className="text-xs text-red-500">{errors.email}</p>
+                )}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input
-                  id="phone"
-                  placeholder="+1 123 456 7890"
-                  type="tel"
+                <PhoneInput 
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
+                  onChange={handlePhoneChange}
+                  error={errors.phone}
                 />
               </div>
 
@@ -107,8 +188,11 @@ const Signup = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
+                  className={errors.password ? "border-red-500" : ""}
                 />
+                {errors.password && (
+                  <p className="text-xs text-red-500">{errors.password}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -119,11 +203,18 @@ const Signup = () => {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
+                  className={errors.confirmPassword ? "border-red-500" : ""}
                 />
+                {errors.confirmPassword && (
+                  <p className="text-xs text-red-500">{errors.confirmPassword}</p>
+                )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                className="w-full backdrop-blur-md bg-primary/80 hover:bg-primary/90 text-white" 
+                disabled={isLoading}
+              >
                 {isLoading ? 'Creating Account...' : 'Create Account'}
               </Button>
             </div>

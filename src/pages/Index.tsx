@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { useLanguage } from '@/components/LanguageSwitch';
-import { CountrySelect } from '@/components/CountrySelect';
 
 // Feature Card Component
 const FeatureCard = ({
@@ -14,7 +13,7 @@ const FeatureCard = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-card-gradient backdrop-blur-sm p-6 rounded-xl border border-purple-500/20 hover:border-purple-500/50 transition-all">
+  <div className="backdrop-blur-xl bg-black/20 p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all">
     <h3 className="text-lg font-semibold mb-2">{title}</h3>
     <p className="text-sm text-muted-foreground">{description}</p>
   </div>
@@ -22,7 +21,7 @@ const FeatureCard = ({
 
 // Stat Card Component
 const StatCard = ({ number, label }: { number: string; label: string }) => (
-  <div className="bg-brand-dark-purple p-4 rounded-lg flex flex-col items-center justify-center">
+  <div className="backdrop-blur-xl bg-black/30 p-4 rounded-lg flex flex-col items-center justify-center border border-white/10">
     <p className="text-2xl font-bold text-primary">{number}</p>
     <p className="text-sm text-muted-foreground">{label}</p>
   </div>
@@ -40,7 +39,7 @@ const TestimonialCard = ({
   testimonial: string;
   imgSrc: string;
 }) => (
-  <div className="bg-card-gradient backdrop-blur-sm p-6 rounded-xl border border-purple-500/20">
+  <div className="backdrop-blur-xl bg-black/20 p-6 rounded-xl border border-white/10">
     <div className="flex items-center mb-4">
       <div className="w-12 h-12 rounded-full bg-brand-purple flex items-center justify-center mr-4">
         {imgSrc ? (
@@ -72,7 +71,7 @@ const Index = () => {
       getStarted: 'Get Started',
       learnMore: 'Learn More',
       aboutTitle: 'About Our Products',
-      aboutText1: 'SGSCRIPT.LIFE makes tech products that matter. We focus on creating premium trading tools that help you achieve your financial goals with precision and confidence.',
+      aboutText1: 'SGSCRIPT makes tech products that matter. We focus on creating premium trading tools that help you achieve your financial goals with precision and confidence.',
       aboutText2: 'Our flagship product, SGSCRIPT, provides advanced trading indicators that will transform how you analyze markets and make trading decisions.',
       whyChooseUs: 'Why Choose Us',
       feature1Title: 'Only the Highest Quality',
@@ -90,13 +89,37 @@ const Index = () => {
       customersServed: 'Customers served',
       productsDeployed: 'Products deployed',
     },
+    hi: {
+      heroTitle: 'गुणवत्ता जीवन के लिए गुणवत्ता उत्पाद।',
+      heroSubtitle: 'हमारे प्रीमियम टूल्स और सेवाओं के साथ अपने ट्रेडिंग अनुभव को बढ़ाएं',
+      getStarted: 'शुरू करें',
+      learnMore: 'और जानें',
+      aboutTitle: 'हमारे उत्पादों के बारे में',
+      aboutText1: 'SGSCRIPT ऐसे टेक प्रोडक्ट्स बनाता है जो मायने रखते हैं। हम प्रीमियम ट्रेडिंग टूल्स बनाने पर ध्यान केंद्रित करते हैं जो आपको सटीकता और आत्मविश्वास के साथ अपने वित्तीय लक्ष्यों को प्राप्त करने में मदद करते हैं।',
+      aboutText2: 'हमारा फ्लैगशिप प्रोडक्ट, SGSCRIPT, उन्नत ट्रेडिंग इंडिकेटर्स प्रदान करता है जो बाजारों का विश्लेषण करने और ट्रेडिंग निर्णय लेने के तरीके को बदल देगा।',
+      whyChooseUs: 'हमें क्यों चुनें',
+      feature1Title: 'केवल उच्चतम गुणवत्ता',
+      feature1Desc: 'हमारे इंडिकेटर्स सटीकता और विश्वसनीयता को ध्यान में रखकर बनाए गए हैं, जो आपको उपलब्ध सर्वश्रेष्ठ ट्रेडिंग टूल्स प्रदान करते हैं।',
+      feature2Title: 'बजट पर आसान',
+      feature2Desc: 'गुणवत्ता से समझौता किए बिना किफायती मूल्य निर्धारण। हमारी सदस्यता योजनाएं विभिन्न बजट के अनुकूल बनाई गई हैं।',
+      feature3Title: 'काम सही तरीके से करता है',
+      feature3Desc: 'SGSCRIPT सटीक संकेत और अंतर्दृष्टि प्रदान करता है जो आपको लगातार सूचित ट्रेडिंग निर्णय लेने में मदद करते हैं।',
+      whatWeveDone: 'हमने क्या किया है',
+      hearFromClients: 'हमारे ग्राहकों से सुनें',
+      readyToWork: 'हमारे साथ काम करने के लिए तैयार हैं?',
+      readySubtext: 'आज ही SGSCRIPT के साथ शुरुआत करें और अपने ट्रेडिंग अनुभव को बदलें।',
+      signUpNow: 'अभी साइन अप करें',
+      tradesAnalyzed: 'विश्लेषित ट्रेड्स',
+      customersServed: 'सेवित ग्राहक',
+      productsDeployed: 'तैनात उत्पाद',
+    },
     ur: {
       heroTitle: 'معیاری زندگی کے لیے معیاری پروڈکٹس۔',
       heroSubtitle: 'ہمارے پریمیم ٹولز اور سروسز کے ساتھ اپنے ٹریڈنگ کے تجربے کو بلند کریں',
       getStarted: 'شروع کریں',
       learnMore: 'مزید جانیں',
       aboutTitle: 'ہمارے پروڈکٹس کے بارے میں',
-      aboutText1: 'SGSCRIPT.LIFE ایسے ٹیک پروڈکٹس بناتا ہے جو اہمیت رکھتے ہیں۔ ہم پریمیم ٹریڈنگ ٹولز بنانے پر توجہ مرکوز کرتے ہیں جو آپ کو اپنے مالی اہداف کو درستگی اور اعتماد کے ساتھ حاصل کرنے میں مدد کرتے ہیں۔',
+      aboutText1: 'SGSCRIPT ایسے ٹیک پروڈکٹس بناتا ہے جو اہمیت رکھتے ہیں۔ ہم پریمیم ٹریڈنگ ٹولز بنانے پر توجہ مرکوز کرتے ہیں جو آپ کو اپنے مالی اہداف کو درستگی اور اعتماد کے ساتھ حاصل کرنے میں مدد کرتے ہیں۔',
       aboutText2: 'ہمارا فلیگشپ پروڈکٹ، SGSCRIPT، اعلی درجے کے ٹریڈنگ انڈیکیٹرز فراہم کرتا ہے جو آپ کے مارکیٹوں کے تجزیے اور ٹریڈنگ کے فیصلوں کو تبدیل کردیں گے۔',
       whyChooseUs: 'ہمیں کیوں چنیں',
       feature1Title: 'صرف اعلی ترین معیار',
@@ -113,30 +136,50 @@ const Index = () => {
       tradesAnalyzed: 'تجزیہ شدہ ٹریڈز',
       customersServed: 'خدمت کیے گئے کسٹمرز',
       productsDeployed: 'تعینات کیے گئے پروڈکٹس',
+    },
+    ar: {
+      heroTitle: 'منتجات عالية الجودة لحياة عالية الجودة.',
+      heroSubtitle: 'ارتق بتجربة التداول الخاصة بك مع أدواتنا وخدماتنا المتميزة',
+      getStarted: 'ابدأ الآن',
+      learnMore: 'اعرف المزيد',
+      aboutTitle: 'عن منتجاتنا',
+      aboutText1: 'يصنع SGSCRIPT منتجات تقنية مهمة. نحن نركز على إنشاء أدوات تداول متميزة تساعدك على تحقيق أهدافك المالية بدقة وثقة.',
+      aboutText2: 'يوفر منتجنا الرئيسي، SGSCRIPT، مؤشرات تداول متقدمة ستغير طريقة تحليلك للأسواق واتخاذ قرارات التداول.',
+      whyChooseUs: 'لماذا تختارنا',
+      feature1Title: 'فقط أعلى جودة',
+      feature1Desc: 'تم بناء مؤشراتنا مع مراعاة الدقة والموثوقية، مما يوفر لك أفضل أدوات التداول المتاحة.',
+      feature2Title: 'سهل على الميزانية',
+      feature2Desc: 'أسعار معقولة دون المساس بالجودة. تم تصميم خطط الاشتراك لدينا لتناسب الميزانيات المختلفة.',
+      feature3Title: 'يؤدي العمل بشكل صحيح',
+      feature3Desc: 'يقدم SGSCRIPT إشارات ورؤى دقيقة تساعدك على اتخاذ قرارات تداول مستنيرة باستمرار.',
+      whatWeveDone: 'ما قمنا به',
+      hearFromClients: 'اسمع من عملائنا',
+      readyToWork: 'مستعد للعمل معنا؟',
+      readySubtext: 'ابدأ مع SGSCRIPT اليوم وقم بتحويل تجربة التداول الخاصة بك.',
+      signUpNow: 'سجل الآن',
+      tradesAnalyzed: 'الصفقات التي تم تحليلها',
+      customersServed: 'العملاء الذين تمت خدمتهم',
+      productsDeployed: 'المنتجات التي تم نشرها',
     }
   };
 
   const t = (key: keyof typeof translations.en): string => {
-    return language === 'en' ? translations.en[key] : translations.ur[key];
+    return translations[language as keyof typeof translations][key] || translations.en[key];
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-dark-purple">
+    <div className="min-h-screen flex flex-col bg-[#0e0e10] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
       <Navbar />
 
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px]">
-          <div className="absolute inset-0 rounded-full border-2 border-primary/20 animate-rotate-slow"></div>
-          <div className="absolute inset-0 rounded-full border-2 border-blue-500/20 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '15s' }}></div>
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className={`text-center max-w-3xl mx-auto ${language === 'ur' ? 'rtl' : ''}`}>
-            <div className="mb-4 flex justify-center">
-              <CountrySelect />
-            </div>
-            <h1 className="text-3xl md:text-5xl font-bold mb-6">
+          <div className={`text-center max-w-3xl mx-auto ${language === 'ur' || language === 'ar' ? 'rtl' : ''}`}>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-gradient">{t('heroTitle')}</span>
             </h1>
             <p className="text-lg mb-8 text-muted-foreground">
@@ -144,24 +187,28 @@ const Index = () => {
             </p>
             <div className="flex justify-center gap-4">
               <Link to="/signup">
-                <Button size="lg" className="rounded-full px-8">
+                <Button size="lg" className="rounded-full px-8 backdrop-blur-md bg-primary/80 hover:bg-primary/90">
                   {t('getStarted')}
                 </Button>
               </Link>
               <Link to="/products">
-                <Button size="lg" variant="outline" className="rounded-full px-8">
+                <Button size="lg" variant="outline" className="rounded-full px-8 backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10">
                   {t('learnMore')}
                 </Button>
               </Link>
             </div>
           </div>
         </div>
+
+        {/* Animated Background Elements */}
+        <div className="absolute top-40 -left-40 w-80 h-80 bg-primary/10 rounded-full filter blur-3xl animate-float opacity-50"></div>
+        <div className="absolute bottom-20 -right-40 w-80 h-80 bg-blue-500/10 rounded-full filter blur-3xl animate-float opacity-30" style={{ animationDelay: "1s" }}></div>
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-gradient-to-b from-brand-dark-purple to-background">
+      <section className="py-16 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className={`grid md:grid-cols-2 gap-12 items-center ${language === 'ur' ? 'rtl' : ''}`}>
+          <div className={`grid md:grid-cols-2 gap-12 items-center ${language === 'ur' || language === 'ar' ? 'rtl' : ''}`}>
             <div className="order-2 md:order-1">
               <h2 className="text-3xl font-bold mb-4">{t('aboutTitle')}</h2>
               <p className="mb-6 text-muted-foreground">
@@ -171,11 +218,11 @@ const Index = () => {
                 {t('aboutText2')}
               </p>
               <Link to="/about">
-                <Button variant="outline">{t('learnMore')}</Button>
+                <Button variant="outline" className="backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10">{t('learnMore')}</Button>
               </Link>
             </div>
             <div className="order-1 md:order-2 relative">
-              <div className="h-64 md:h-96 bg-card-gradient rounded-xl flex items-center justify-center animate-float">
+              <div className="h-64 md:h-96 backdrop-blur-xl bg-black/20 rounded-xl flex items-center justify-center animate-float border border-white/10">
                 <div className="glowing-ring p-8 rounded-full">
                   <div className="text-4xl font-bold text-gradient">SGSCRIPT</div>
                 </div>
@@ -186,7 +233,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center">{t('whyChooseUs')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -207,7 +254,7 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-b from-background to-brand-dark-purple">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center">{t('whatWeveDone')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -216,10 +263,13 @@ const Index = () => {
             <StatCard number="658" label={t('productsDeployed')} />
           </div>
         </div>
+
+        {/* Animated Background Elements */}
+        <div className="absolute top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full filter blur-3xl opacity-30"></div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-gradient-to-b from-brand-dark-purple to-background">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center">
             {t('hearFromClients')}
@@ -228,42 +278,47 @@ const Index = () => {
             <TestimonialCard
               name="Dempsey and Delta"
               company="Trading Firm"
-              testimonial="SGSCRIPT.LIFE has completely transformed our trading strategy. The accuracy of the signals is impressive and has greatly improved our success rate."
+              testimonial="SGSCRIPT has completely transformed our trading strategy. The accuracy of the signals is impressive and has greatly improved our success rate."
               imgSrc=""
             />
             <TestimonialCard
               name="Noah Schumacher"
               company="Individual Trader"
-              testimonial="As someone new to trading, SGSCRIPT.LIFE has been a game changer. The indicators are easy to understand and have helped me make more confident decisions."
+              testimonial="As someone new to trading, SGSCRIPT has been a game changer. The indicators are easy to understand and have helped me make more confident decisions."
               imgSrc=""
             />
             <TestimonialCard
               name="Stipple Unlimited"
               company="Investment Group"
-              testimonial="The AI-powered indicators from SGSCRIPT.LIFE have given us an edge in the market. Their monthly scratch card rewards are a nice bonus too!"
+              testimonial="The AI-powered indicators from SGSCRIPT have given us an edge in the market. Their monthly scratch card rewards are a nice bonus too!"
               imgSrc=""
             />
           </div>
         </div>
+
+        {/* Animated Background Elements */}
+        <div className="absolute bottom-10 -left-20 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl opacity-30"></div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">{t('readyToWork')}</h2>
-          <p className="mb-8 max-w-lg mx-auto text-muted-foreground">
-            {t('readySubtext')}
-          </p>
-          <Link to="/signup">
-            <Button size="lg" className="rounded-full px-8">
-              {t('signUpNow')}
-            </Button>
-          </Link>
+          <div className="backdrop-blur-xl bg-black/30 p-8 md:p-12 rounded-2xl border border-white/10 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4">{t('readyToWork')}</h2>
+            <p className="mb-8 max-w-lg mx-auto text-muted-foreground">
+              {t('readySubtext')}
+            </p>
+            <Link to="/signup">
+              <Button size="lg" className="rounded-full px-8 backdrop-blur-md bg-primary/80 hover:bg-primary/90">
+                {t('signUpNow')}
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-border">
+      <footer className="py-8 border-t border-white/10 backdrop-blur-xl bg-black/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center md:text-left">
@@ -284,7 +339,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-center mt-8 text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} SGSCRIPT.LIFE. All rights reserved.
+            &copy; {new Date().getFullYear()} SGSCRIPT. All rights reserved.
           </div>
         </div>
       </footer>

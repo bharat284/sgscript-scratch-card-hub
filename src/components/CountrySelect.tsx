@@ -41,13 +41,14 @@ export const CountryProvider: React.FC<{ children: React.ReactNode }> = ({ child
   );
 };
 
-export const CountrySelect: React.FC = () => {
+export const CountrySelect: React.FC<{ className?: string }> = ({ className }) => {
   const { country, setCountry } = useCountry();
 
   return (
     <Select
       value={country}
       onValueChange={(value) => setCountry(value as Country)}
+      className={className}
     >
       <SelectTrigger className="w-[90px]">
         <SelectValue placeholder="Country" />
