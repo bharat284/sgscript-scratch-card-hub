@@ -57,7 +57,6 @@ const Signup = () => {
   const [referrerName, setReferrerName] = useState<string | null>(null);
   const [referredBy, setReferredBy] = useState(refId);
 
-  // Parse query parameters to get referral info
   useEffect(() => {
     if (refId) {
       // This would typically be an API call to get the referrer's name

@@ -41,18 +41,20 @@ const PhoneInput: React.FC<PhoneInputProps> = ({ value, onChange, error }) => {
   };
 
   return (
-    <div className="flex">
-      <div className="mr-2">
+    <div className="flex gap-2">
+      <div className="relative">
         <Select value={selectedCountry.code} onValueChange={handleCountryChange}>
-          <SelectTrigger className="w-[100px]">
-            <span className="mr-2">{selectedCountry.flag}</span>
-            <SelectValue placeholder={selectedCountry.dialCode} />
+          <SelectTrigger className="w-[120px] glass-premium">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">{selectedCountry.flag}</span>
+              <SelectValue placeholder={selectedCountry.dialCode} />
+            </div>
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="glass-premium bg-black/80 backdrop-blur-xl border-white/10">
             {countryCodes.map((country) => (
-              <SelectItem key={country.code} value={country.code}>
-                <div className="flex items-center">
-                  <span className="mr-2">{country.flag}</span>
+              <SelectItem key={country.code} value={country.code} className="hover:bg-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">{country.flag}</span>
                   <span>{country.dialCode}</span>
                 </div>
               </SelectItem>
@@ -65,7 +67,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({ value, onChange, error }) => {
           value={phoneNumber} 
           onChange={handlePhoneNumberChange} 
           placeholder="Phone number" 
-          className={error ? "border-red-500" : ""}
+          className={`glass-premium ${error ? "border-red-500" : ""}`}
         />
         {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
       </div>
