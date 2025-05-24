@@ -5,9 +5,20 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/context/AuthContext';
 import PhoneInput from '@/components/PhoneInput';
 import { useToast } from '@/hooks/use-toast';
+
+// Define FormErrors type
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+  confirmPassword?: string;
+}
 
 // Update the schema to include referredBy
 const signupSchema = z.object({
