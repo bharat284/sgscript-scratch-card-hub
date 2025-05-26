@@ -8,6 +8,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useAuth } from '@/context/AuthContext';
+import { LanguageSwitch } from '@/components/LanguageSwitch';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -44,6 +45,7 @@ const Navbar = () => {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
+          <LanguageSwitch />
           {isLoggedIn ? (
             <>
               <Link to="/dashboard">
@@ -101,6 +103,9 @@ const Navbar = () => {
               <Link to="/contact" className="text-lg">
                 Contact
               </Link>
+              <div className="pt-4">
+                <LanguageSwitch />
+              </div>
               <div className="pt-4 flex flex-col space-y-4">
                 {isLoggedIn ? (
                   <>
