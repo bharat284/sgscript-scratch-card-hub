@@ -20,15 +20,16 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
   // Use useMemo to optimize the formatPrice function
   const formatPrice = useMemo(() => {
     return (amount: number): string => {
-      const exchangeRate = 83; // 1 USD = 83 INR approximately
-      
-      // If country is India, show price in INR regardless of selected currency
+      // If country is India, show price in INR with special pricing
       if (country === 'in') {
-        return `₹${(amount * exchangeRate).toFixed(2)}`;
+        // Special pricing for India: $10 = ₹99
+        const inrAmount = amount === 10 ? 99 : amount * 8.3;
+        return `₹${inrAmount.toFixed(0)}`;
       }
       
       // For other countries, use the selected currency
       if (currency === 'INR') {
+        const exchangeRate = 83; // 1 USD = 83 INR approximately
         const inrAmount = amount * exchangeRate;
         return `₹${inrAmount.toFixed(2)}`;
       }

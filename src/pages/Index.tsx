@@ -130,14 +130,20 @@ const ClubCard = ({
 
 // Price Card Component
 const PriceCard = ({ country }: { country: string }) => {
-  const isPriceInRupees = country === 'in';
+  const formatPrice = (basePrice: number): string => {
+    if (country === 'in') {
+      // Special pricing for India: $10 = ₹99
+      return basePrice === 10 ? '₹99' : `₹${(basePrice * 8.3).toFixed(0)}`;
+    }
+    return `$${basePrice}`;
+  };
   
   return (
     <div className="glass-premium p-8 rounded-xl border border-white/10 hover:border-white/20 transition-all max-w-md mx-auto">
       <h3 className="text-xl font-bold mb-2 text-gradient">SGSCRIPT</h3>
       <div className="flex items-end mb-6">
         <span className="text-4xl font-bold">
-          {isPriceInRupees ? '₹10' : '$10'}
+          {formatPrice(10)}
         </span>
         <span className="text-muted-foreground ml-1 mb-1">/month</span>
       </div>
@@ -387,19 +393,19 @@ const Index = () => {
       getStarted: 'شروع کریں',
       learnMore: 'مزید جانیں',
       aboutTitle: 'ہمارे پروڈکٹس کے بارے میں',
-      aboutText1: 'SGSCRIPT ایسے ٹیک پروڈکٹس بناتا ہے جو اہمیت رکھتے ہیں۔ ہم پریمیم ٹریڈنگ ٹولز بنانے پر توجہ مرکوز کرتے ہیں جو آپ کو اپنے مالی اہداف کو درستگی اور اعتماد کے ساتھ حاصل کرنے میں مدد کرتے ہیں۔',
+      aboutText1: 'SGSCRIPT ایسے ٹیک پروڈکٹس بناتا ہے جو اہمیت رکھتے ہیں۔ ہم پریمیم ٹریڈنگ ٹولز بنانے پر توجہ مرکوز کرتے ہیں جو آپ کو اپنے مالی اہداف کو درستگی اور اعتماد کے ساتھ حاصل کرنे میں مدد کرتे ہیں۔',
       aboutText2: 'ہمارا فلیگشپ پروڈکٹ، SGSCRIPT، اعلی درجے کے ٹریڈنگ انڈیکیٹرز فراہم کرتا ہے جو آپ کے مارکیٹوں کے تجزیے اور ٹریڈنگ کے فیصلوں کو تبدیل کردیں گے۔',
       whyChooseUs: 'ہمیں کیوں چنیں',
       feature1Title: 'صرف اعلی ترین معیار',
-      feature1Desc: 'ہمارے انڈیکیٹرز درستگی اور قابل اعتماد ہونے کو مدنظر رکھتے ہوئے بنائے گئے ہیں، آپ کو دستیاب بہترین ٹریڈنگ ٹولز فراہم کرتे ہیں۔',
+      feature1Desc: 'ہمارे انڈیکیٹرز درستگی اور قابل اعتماد ہونے کو مدنظر رکھتے ہوئے بنائے گئے ہیں، آپ کو دستیاب بہترین ٹریڈنگ ٹولز فراہم کرتे ہیں۔',
       feature2Title: 'بجट پر آسان',
-      feature2Desc: 'معیار سے سمجھوتا کیے بغیر سستی قیمتیں۔ ہمارे سبسکرپشن پلانز مختلف بجٹ کے مطابق ڈیزائن کیے گئے ہیں۔',
+      feature2Desc: 'معیار سے سمجھوتا کیے بغیر سستی قیمتیں۔ ہمارे سبسکرپشن پلانز مختلف بجٹ کे مطابق ڈیزائن کیے گئے ہیں۔',
       feature3Title: 'کام درست طریقے سے کرتا ہے',
       feature3Desc: 'SGSCRIPT درست سگنلز اور بصیرتیں فراہم کرتا ہے جو آپ کو مسلسل آگاہی سے بھرپور ٹریڈنگ فیصلے کرنے میں مدد کرتे ہیں۔',
       whatWeveDone: 'ہم نے کیا کیا ہے',
-      hearFromClients: 'ہمارे کلائنٹس سے سنیں',
+      hearFromClients: 'ہمارे کلائنٹس सے سنیں',
       readyToWork: 'ہمارे सاتھ کام कرنے کे لیے تیار ہیں?',
-      readySubtext: 'آج ہی SGSCRIPT के ساتھ شروعات کریں اور اپنے ٹریڈنگ کے تجربے کو تبدیل کریں۔',
+      readySubtext: 'آج ہی SGSCRIPT के साथ شروعات کریں اور اپنے ٹریڈنگ کے تجربے کو تبدیل کریں۔',
       signUpNow: 'ابھی سائن اپ کریں',
       tradesAnalyzed: 'تجزیہ شدہ ٹریڈز',
       customersServed: 'خدمت کیے گئے کسٹمرز',
@@ -428,7 +434,7 @@ const Index = () => {
       signUpNow: 'سجل الآن',
       tradesAnalyzed: 'الصفقات التي تم تحليلها',
       customersServed: 'العملاء الذين تمت خدمتهم',
-      productsDeployed: 'المنتجات التي تم نشرها',
+      productsDeployed: 'تعینات کیے گئے پروڈکٹس',
       frequentQuestions: 'الأسئلة المتكررة',
     }
   };

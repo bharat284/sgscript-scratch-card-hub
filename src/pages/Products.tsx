@@ -3,7 +3,6 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Check, Star } from 'lucide-react';
 import { useCurrency } from '@/context/CurrencyContext';
 import { useLanguage } from '@/components/LanguageSwitch';
@@ -11,57 +10,18 @@ import { useCountry } from '@/components/CountrySelect';
 import { Link } from 'react-router-dom';
 
 const Products = () => {
-  const { formatPrice } = useCurrency();
-  const { language } = useLanguage();
   const { country } = useCountry();
+  const { language } = useLanguage();
 
-  const pricingPlans = [
-    {
-      name: language === 'en' ? 'Starter' : 'شروعاتی',
-      price: 5,
-      duration: language === 'en' ? 'Monthly' : 'ماہانہ',
-      description: language === 'en' ? 'Perfect for beginners' : 'ابتدائی افراد کے لیے بہترین',
-      features: [
-        language === 'en' ? 'Basic trading signals' : 'بنیادی ٹریڈنگ سگنلز',
-        language === 'en' ? 'Email support' : 'ای میل سپورٹ',
-        language === 'en' ? '50% accuracy rate' : '50٪ درستگی کی شرح',
-        language === 'en' ? 'Monthly scratch card' : 'ماہانہ اسکریچ کارڈ'
-      ],
-      popular: false
-    },
-    {
-      name: language === 'en' ? 'Professional' : 'پیشہ ور',
-      price: 10,
-      duration: language === 'en' ? 'Monthly' : 'ماہانہ',
-      description: language === 'en' ? 'Most popular choice' : 'سب سے مقبول انتخاب',
-      features: [
-        language === 'en' ? 'Advanced AI signals' : 'جدید اے آئی سگنلز',
-        language === 'en' ? '70-80% accuracy rate' : '70-80٪ درستگی کی شرح',
-        language === 'en' ? 'Real-time alerts' : 'ریئل ٹائم الرٹس',
-        language === 'en' ? 'TradingView integration' : 'ٹریڈنگ ویو انضمام',
-        language === 'en' ? 'Zerodha integration' : 'زیروڈھا انضمام',
-        language === 'en' ? 'Priority support' : 'ترجیحی سپورٹ',
-        language === 'en' ? 'Monthly scratch card' : 'ماہانہ اسکریچ کارڈ'
-      ],
-      popular: true
-    },
-    {
-      name: language === 'en' ? 'Enterprise' : 'انٹرپرائز',
-      price: 25,
-      duration: language === 'en' ? 'Monthly' : 'ماہانہ',
-      description: language === 'en' ? 'For serious traders' : 'سنجیدہ تاجروں کے لیے',
-      features: [
-        language === 'en' ? 'Premium AI signals' : 'پریمیم اے آئی سگنلز',
-        language === 'en' ? '85-90% accuracy rate' : '85-90٪ درستگی کی شرح',
-        language === 'en' ? 'Multi-timeframe analysis' : 'ملٹی ٹائم فریم تجزیہ',
-        language === 'en' ? 'Custom indicators' : 'کسٹم انڈیکیٹرز',
-        language === 'en' ? 'API access' : 'اے پی آئی رسائی',
-        language === 'en' ? '24/7 phone support' : '24/7 فون سپورٹ',
-        language === 'en' ? 'Weekly scratch cards' : 'ہفتہ وار اسکریچ کارڈز'
-      ],
-      popular: false
+  // Simple price formatting based on country
+  const formatPrice = (basePrice: number): string => {
+    if (country === 'in') {
+      // For India, convert $10 to ₹99
+      const inrPrice = basePrice === 10 ? 99 : basePrice * 8.3;
+      return `₹${inrPrice}`;
     }
-  ];
+    return `$${basePrice}`;
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0e0e10] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
@@ -144,50 +104,6 @@ const Products = () => {
               </div>
             </CardFooter>
           </Card>
-        </div>
-
-        {/* Pricing Plans */}
-        <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gradient">
-            {language === 'en' ? 'Choose Your Plan' : 'اپنا پلان منتخب کریں'}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <Card key={index} className={`glass-card relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
-                {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary">
-                    <Star className="w-3 h-3 mr-1" />
-                    {language === 'en' ? 'Most Popular' : 'سب سے مقبول'}
-                  </Badge>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl">{plan.name}</CardTitle>
-                  <CardDescription>{plan.description}</CardDescription>
-                  <div className="text-3xl font-bold text-primary">
-                    {formatPrice(plan.price)}
-                    <span className="text-sm text-muted-foreground">/{plan.duration}</span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm">
-                        <Check className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Link to="/signup" className="w-full">
-                    <Button className="w-full" variant={plan.popular ? "default" : "outline"}>
-                      {language === 'en' ? 'Choose Plan' : 'پلان منتخب کریں'}
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
         </div>
 
         {/* Feature highlights */}
