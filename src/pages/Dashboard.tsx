@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import TradingViewWidget from '@/components/TradingViewWidget';
 import CountdownTimer from '@/components/CountdownTimer';
 import ReferralLink from '@/components/ReferralLink';
-import { Timer } from 'lucide-react';
+import { Timer, ExternalLink } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -43,10 +43,17 @@ const Dashboard = () => {
     amount: country === 'in' ? '₹2' : '$0.02',
   };
 
+  // Mock referral scratch card data
+  const referralScratchCard = {
+    available: user?.referralCount >= 5,
+    nextAvailableAt: new Date(new Date().getFullYear() + 1, 0, 1), // Next January 1st
+    potentialReward: country === 'in' ? '₹10,000 - ₹1,00,000' : '$1,000 - $10,000',
+  };
+
   // Calculate subscription expiry date (today + 30 days if not available)
   const subscriptionExpiryDate = user?.subscriptionExpiryDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date) => {
     return date.toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',
@@ -142,7 +149,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Scratch Card */}
+            {/* Monthly Scratch Card */}
             <Card className="mb-6 overflow-hidden glass-section">
               <div className="bg-card-gradient h-2"></div>
               <CardHeader>
@@ -206,6 +213,71 @@ const Dashboard = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Referral Scratch Card */}
+            <Card className="mb-6 overflow-hidden glass-section">
+              <div className="bg-gradient-to-r from-yellow-400/20 to-purple-400/20 h-2"></div>
+              <CardHeader>
+                <CardTitle>Referral Scratch Card</CardTitle>
+                <CardDescription>
+                  Annual rewards for Club members based on referral achievements
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col md:flex-row items-center gap-6">
+                  <div className="w-full md:w-1/3">
+                    <div 
+                      className={`aspect-square rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4
+                        ${referralScratchCard.available ? 'border-yellow-400/60 bg-gradient-to-br from-yellow-400/10 to-purple-400/10' : 'border-muted-foreground/30'}`}
+                    >
+                      <div className="text-lg font-bold mb-2">Club Scratch Card</div>
+                      <div className="text-sm text-muted-foreground mb-3 text-center">
+                        {referralScratchCard.available ? 
+                          `Available ${formatDate(referralScratchCard.nextAvailableAt)}` : 
+                          'Reach 25 referrals to unlock'
+                        }
+                      </div>
+                      {referralScratchCard.available && (
+                        <div className="text-lg font-bold text-center bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">
+                          {referralScratchCard.potentialReward}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="w-full md:w-2/3">
+                    <h3 className="text-xl font-bold mb-2">Club Rewards</h3>
+                    <p className="text-muted-foreground mb-4">
+                      Join our exclusive referral club and earn massive annual rewards through special scratch cards.
+                    </p>
+                    
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center justify-between p-2 rounded border border-gray-400/20">
+                        <span className="text-sm">Silver Club (25 referrals)</span>
+                        <span className="font-semibold text-gray-300">
+                          {country === 'in' ? '₹10,000' : '$1,000'}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between p-2 rounded border border-yellow-400/20">
+                        <span className="text-sm">Gold Club (50 referrals)</span>
+                        <span className="font-semibold text-yellow-400">
+                          {country === 'in' ? '₹50,000' : '$5,000'}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between p-2 rounded border border-purple-400/20">
+                        <span className="text-sm">Platinum Club (100 referrals)</span>
+                        <span className="font-semibold text-purple-400">
+                          {country === 'in' ? '₹1,00,000' : '$10,000'}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-muted-foreground">
+                      * Club rewards are delivered annually as scratch cards on January 1st
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Sidebar */}
@@ -251,7 +323,13 @@ const Dashboard = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Referral Count</span>
+                    <button 
+                      onClick={() => navigate('/referrals')}
+                      className="text-muted-foreground hover:text-primary cursor-pointer flex items-center gap-1"
+                    >
+                      Referral Count
+                      <ExternalLink size={14} />
+                    </button>
                     <span>
                       {user?.referralCount || 0}
                     </span>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -65,6 +64,68 @@ const FeatureSection = ({
       </div>
     </div>
   </section>
+);
+
+// Club Card Component
+const ClubCard = ({ 
+  tier, 
+  badge, 
+  referrals, 
+  duration, 
+  reward, 
+  country 
+}: {
+  tier: string;
+  badge: string;
+  referrals: number;
+  duration: string;
+  reward: string;
+  country: string;
+}) => (
+  <div className="glass-premium p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all">
+    <div className="text-center mb-6">
+      <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
+        tier === 'Silver' ? 'bg-gray-400/20' : 
+        tier === 'Gold' ? 'bg-yellow-400/20' : 
+        'bg-purple-400/20'
+      }`}>
+        <span className={`text-2xl font-bold ${
+          tier === 'Silver' ? 'text-gray-300' : 
+          tier === 'Gold' ? 'text-yellow-400' : 
+          'text-purple-400'
+        }`}>
+          {tier === 'Silver' ? 'S' : tier === 'Gold' ? 'G' : 'P'}
+        </span>
+      </div>
+      <h3 className="text-xl font-bold mb-2">{tier}</h3>
+      <p className="text-sm text-muted-foreground">{badge}</p>
+    </div>
+    
+    <div className="space-y-4 mb-6">
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">Referrals Required</span>
+        <span className="font-semibold">{referrals}</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">Duration</span>
+        <span className="font-semibold">{duration}</span>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">Reward</span>
+        <span className={`font-bold ${
+          tier === 'Silver' ? 'text-gray-300' : 
+          tier === 'Gold' ? 'text-yellow-400' : 
+          'text-purple-400'
+        }`}>
+          {country === 'in' ? `₹${reward}` : `$${reward}`}
+        </span>
+      </div>
+    </div>
+    
+    <div className="text-xs text-muted-foreground text-center">
+      Reward delivered as annual scratch card
+    </div>
+  </div>
 );
 
 // Price Card Component
@@ -302,7 +363,7 @@ const Index = () => {
       learnMore: 'और जानें',
       aboutTitle: 'हमारे उत्पादों के बारे में',
       aboutText1: 'SGSCRIPT ऐसे टेक प्रोडक्ट्स बनाता है जो मायने रखते हैं। हम प्रीमियम ट्रेडिंग टूल्स बनाने पर ध्यान केंद्रित करते हैं जो आपको सटीकता और आत्मविश्वास के साथ अपने वित्तीय लक्ष्यों को प्राप्त करने में मदद करते हैं।',
-      aboutText2: 'हमारा फ्लैगशिप प्रोडक्ट, SGSCRIPT, उन्नत ट्रेडिंग इंडिकेटर्स प्रदान करता है जो बाजारों का विश्लेषण करने और ट्रेडिंग निर्णय लेने के तरीके को बदल देगा।',
+      aboutText2: 'हमारा फ्लैगशिप प्रोडक्ट, SGSCRIPT, उन्नत ट्रेडिंग इंडिकेटर्स प्रदान करता है जो बाजारों का विश्लेषण करने और ट्रेडिंग के فیصلों को बदल देगा।',
       whyChooseUs: 'हमें क्यों चुनें',
       feature1Title: 'केवल उच्चतम गुणवत्ता',
       feature1Desc: 'हमारे इंडिकेटर्स सटीकता और विश्वसनीयता को ध्यान में रखकर बनाए गए हैं, जो आपको उपलब्ध सर्वश्रेष्ठ ट्रेडिंग टूल्स प्रदान करते हैं।',
@@ -311,7 +372,7 @@ const Index = () => {
       feature3Title: 'काम सही तरीके से करता है',
       feature3Desc: 'SGSCRIPT सटीक संकेत और अंतर्दृष्टि प्रदान करता है जो आपको लगातार सूचित ट्रेडिंग निर्णय लेने में मदद करते हैं।',
       whatWeveDone: 'हमने क्या किया है',
-      hearFromClients: 'हमारे ग्राहकों से सुनें',
+      hearFromClients: 'हमारे क्लائنटस से सुनें',
       readyToWork: 'हमारे साथ काम करने के लिए तैयार हैं?',
       readySubtext: 'आज ही SGSCRIPT के साथ शुरुआत करें और अपने ट्रेडिंग अनुभव को बदलें।',
       signUpNow: 'अभी साइन अप करें',
@@ -325,25 +386,25 @@ const Index = () => {
       heroSubtitle: 'ہمارے پریمیم ٹولز اور سروسز کے ساتھ اپنے ٹریڈنگ کے تجربے کو بلند کریں',
       getStarted: 'شروع کریں',
       learnMore: 'مزید جانیں',
-      aboutTitle: 'ہمارے پروڈکٹس کے بارے میں',
+      aboutTitle: 'ہمارे پروڈکٹس کے بارے میں',
       aboutText1: 'SGSCRIPT ایسے ٹیک پروڈکٹس بناتا ہے جو اہمیت رکھتے ہیں۔ ہم پریمیم ٹریڈنگ ٹولز بنانے پر توجہ مرکوز کرتے ہیں جو آپ کو اپنے مالی اہداف کو درستگی اور اعتماد کے ساتھ حاصل کرنے میں مدد کرتے ہیں۔',
       aboutText2: 'ہمارا فلیگشپ پروڈکٹ، SGSCRIPT، اعلی درجے کے ٹریڈنگ انڈیکیٹرز فراہم کرتا ہے جو آپ کے مارکیٹوں کے تجزیے اور ٹریڈنگ کے فیصلوں کو تبدیل کردیں گے۔',
       whyChooseUs: 'ہمیں کیوں چنیں',
       feature1Title: 'صرف اعلی ترین معیار',
-      feature1Desc: 'ہمارے انڈیکیٹرز درستگی اور قابل اعتماد ہونے کو مدنظر رکھتے ہوئے بنائے گئے ہیں، آپ کو دستیاب بہترین ٹریڈنگ ٹولز فراہم کرتے ہیں۔',
-      feature2Title: 'بجٹ پر آسان',
-      feature2Desc: 'معیار سے سمجھوتا کیے بغیر سستی قیمتیں۔ ہمارے سبسکرپشن پلانز مختلف بجٹ کے مطابق ڈیزائن کیے گئے ہیں۔',
+      feature1Desc: 'ہمارے انڈیکیٹرز درستگی اور قابل اعتماد ہونے کو مدنظر رکھتے ہوئے بنائے گئے ہیں، آپ کو دستیاب بہترین ٹریڈنگ ٹولز فراہم کرتे ہیں۔',
+      feature2Title: 'بجट پر آسان',
+      feature2Desc: 'معیار سے سمجھوتا کیے بغیر سستی قیمتیں۔ ہمارे سبسکرپشن پلانز مختلف بجٹ کے مطابق ڈیزائن کیے گئے ہیں۔',
       feature3Title: 'کام درست طریقے سے کرتا ہے',
-      feature3Desc: 'SGSCRIPT درست سگنلز اور بصیرتیں فراہم کرتا ہے جو آپ کو مسلسل آگاہی سے بھرپور ٹریڈنگ فیصلے کرنے میں مدد کرتے ہیں۔',
+      feature3Desc: 'SGSCRIPT درست سگنلز اور بصیرتیں فراہم کرتا ہے جو آپ کو مسلسل آگاہی سے بھرپور ٹریڈنگ فیصلے کرنے میں مدد کرتे ہیں۔',
       whatWeveDone: 'ہم نے کیا کیا ہے',
-      hearFromClients: 'ہمارے کلائنٹس سے سنیں',
-      readyToWork: 'ہمارے ساتھ کام کرنے کے لیے تیار ہیں؟',
-      readySubtext: 'آج ہی SGSCRIPT کے ساتھ شروعات کریں اور اپنے ٹریڈنگ کے تجربے کو تبدیل کریں۔',
+      hearFromClients: 'ہمارे کلائنٹس سے سنیں',
+      readyToWork: 'ہمارे सاتھ کام कرنے کे لیے تیار ہیں?',
+      readySubtext: 'آج ہی SGSCRIPT के ساتھ شروعات کریں اور اپنے ٹریڈنگ کے تجربے کو تبدیل کریں۔',
       signUpNow: 'ابھی سائن اپ کریں',
       tradesAnalyzed: 'تجزیہ شدہ ٹریڈز',
       customersServed: 'خدمت کیے گئے کسٹمرز',
       productsDeployed: 'تعینات کیے گئے پروڈکٹس',
-      frequentQuestions: 'اکثر پوچھے گئے سوالات',
+      frequentQuestions: 'اکثر پوچھے گئे سوالات',
     },
     ar: {
       heroTitle: 'عزز استراتيجية التداول الخاصة بك بمؤشرات مدعومة بالذكاء الاصطناعي',
@@ -509,6 +570,43 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center">Pricing</h2>
           <PriceCard country={country} />
+        </div>
+      </section>
+
+      {/* Club Section */}
+      <section className="py-16 relative">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-4 text-center">SGSCRIPT Club</h2>
+          <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
+            Join our exclusive referral club and earn amazing rewards. Build your network and unlock premium benefits.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <ClubCard 
+              tier="Silver"
+              badge="Silver Badge"
+              referrals={25}
+              duration="4 months"
+              reward={country === 'in' ? '10,000' : '1,000'}
+              country={country}
+            />
+            <ClubCard 
+              tier="Gold"
+              badge="Gold Badge"
+              referrals={50}
+              duration="8 months"
+              reward={country === 'in' ? '50,000' : '5,000'}
+              country={country}
+            />
+            <ClubCard 
+              tier="Platinum"
+              badge="Platinum Badge"
+              referrals={100}
+              duration="1 year"
+              reward={country === 'in' ? '1,00,000' : '10,000'}
+              country={country}
+            />
+          </div>
         </div>
       </section>
 
