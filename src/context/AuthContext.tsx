@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
@@ -13,6 +14,7 @@ interface User {
   referredBy?: string;
   referralCount?: number;
   subscriptionExpiryDate?: Date;
+  role?: string;
 }
 
 interface AuthContextType {
@@ -32,6 +34,105 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Test user accounts for development
+const testUsers = {
+  'test@example.com': {
+    password: 'password',
+    userData: {
+      id: '1',
+      email: 'test@example.com',
+      name: 'Test User',
+      phone: '+1 234 567 8901',
+      emailVerified: true,
+      phoneVerified: true,
+      referredBy: 'Organic',
+      referralCount: 2,
+      subscriptionExpiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      role: 'user',
+    }
+  },
+  'admin@sgscript.com': {
+    password: 'admin123',
+    userData: {
+      id: '7',
+      email: 'admin@sgscript.com',
+      name: 'Admin User',
+      phone: '+1 800 555 0199',
+      tradingviewId: 'admin_tv',
+      emailVerified: true,
+      phoneVerified: true,
+      referredBy: null,
+      referralCount: 0,
+      subscriptionExpiryDate: null,
+      role: 'admin',
+    }
+  },
+  'grace@example.com': {
+    password: 'vip123',
+    userData: {
+      id: '10',
+      email: 'grace@example.com',
+      name: 'Grace Lee',
+      phone: '+82 2 1234 5678',
+      tradingviewId: 'gracelee_tv',
+      emailVerified: true,
+      phoneVerified: true,
+      referredBy: null,
+      referralCount: 150,
+      subscriptionExpiryDate: new Date('2024-09-30'),
+      role: 'vip',
+    }
+  },
+  'jane@example.com': {
+    password: 'jane123',
+    userData: {
+      id: '2',
+      email: 'jane@example.com',
+      name: 'Jane Smith',
+      phone: '+1 234 567 8902',
+      tradingviewId: 'janesmith_tv',
+      emailVerified: false,
+      phoneVerified: true,
+      referredBy: 'John Doe',
+      referralCount: 8,
+      subscriptionExpiryDate: null,
+      role: 'user',
+    }
+  },
+  'frank@example.com': {
+    password: 'frank123',
+    userData: {
+      id: '9',
+      email: 'frank@example.com',
+      name: 'Frank Wilson',
+      phone: '+61 2 9876 5432',
+      tradingviewId: null,
+      emailVerified: true,
+      phoneVerified: false,
+      referredBy: 'Diana Prince',
+      referralCount: 0,
+      subscriptionExpiryDate: null,
+      role: 'user',
+    }
+  },
+  'diana@example.com': {
+    password: 'diana123',
+    userData: {
+      id: '6',
+      email: 'diana@example.com',
+      name: 'Diana Prince',
+      phone: '+1 555 123 4567',
+      tradingviewId: 'dianaprince_tv',
+      emailVerified: false,
+      phoneVerified: false,
+      referredBy: 'Bob Johnson',
+      referralCount: 3,
+      subscriptionExpiryDate: new Date('2024-01-15'),
+      role: 'user',
+    }
+  },
+};
+
 // For demo purposes, we'll simulate auth with localStorage
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -46,25 +147,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
-  // Mock login function
+  // Mock login function with test accounts
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
       // This would be replaced with an actual API call
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
       
-      if (email === 'test@example.com' && password === 'password') {
-        const userData: User = {
-          id: '1',
-          email,
-          emailVerified: false,
-          phoneVerified: false,
-          referredBy: 'Organic', // Default to organic
-          referralCount: 2, // Mock some referrals
-          subscriptionExpiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
-        };
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(userData);
+      // Check if it's a test account
+      const testUser = testUsers[email as keyof typeof testUsers];
+      if (testUser && testUser.password === password) {
+        localStorage.setItem('user', JSON.stringify(testUser.userData));
+        setUser(testUser.userData);
       } else {
         throw new Error('Invalid email or password');
       }
@@ -90,6 +184,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         referredBy: referredBy || 'Organic',
         referralCount: 0,
         subscriptionExpiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+        role: 'user',
       };
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
