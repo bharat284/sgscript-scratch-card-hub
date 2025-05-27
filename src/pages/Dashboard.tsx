@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -43,11 +42,30 @@ const Dashboard = () => {
     amount: country === 'in' ? '₹2' : '$0.02',
   };
 
-  // Mock referral scratch card data
-  const referralScratchCard = {
-    available: user?.referralCount >= 5,
-    nextAvailableAt: new Date(new Date().getFullYear() + 1, 0, 1), // Next January 1st
-    potentialReward: country === 'in' ? '₹10,000 - ₹1,00,000' : '$1,000 - $10,000',
+  // Mock referral scratch card data with standard tier
+  const referralScratchCards = {
+    standard: {
+      available: user?.referralCount >= 5,
+      monthlyReward: country === 'in' ? '₹1,000' : '$100',
+      description: 'Monthly scratch card for 5+ referrals'
+    },
+    club: {
+      silver: {
+        available: user?.referralCount >= 25,
+        nextAvailableAt: new Date(new Date().getFullYear() + 1, 0, 1),
+        reward: country === 'in' ? '₹10,000' : '$1,000',
+      },
+      gold: {
+        available: user?.referralCount >= 50,
+        nextAvailableAt: new Date(new Date().getFullYear() + 1, 0, 1),
+        reward: country === 'in' ? '₹50,000' : '$5,000',
+      },
+      platinum: {
+        available: user?.referralCount >= 100,
+        nextAvailableAt: new Date(new Date().getFullYear() + 1, 0, 1),
+        reward: country === 'in' ? '₹1,00,000' : '$10,000',
+      }
+    }
   };
 
   // Calculate subscription expiry date (today + 30 days if not available)
@@ -74,8 +92,8 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Subscription Timer */}
-        <div className="mb-6">
+        {/* Subscription Timer - Compact Version */}
+        <div className="mb-6 max-w-md">
           <CountdownTimer expiryDate={subscriptionExpiryDate} />
         </div>
 
@@ -85,9 +103,12 @@ const Dashboard = () => {
         </div>
 
         {/* TradingView Widget */}
-        <Card className="mb-6 glass-section">
+        <Card className="mb-6 glass-card hover:scale-[1.01] transition-all duration-300">
           <CardHeader>
-            <CardTitle>SGSCRIPT.LIFE Training Analysis</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+              SGSCRIPT.LIFE Training Analysis
+            </CardTitle>
             <CardDescription>
               Real-time market data and Training analysis tools
             </CardDescription>
@@ -106,9 +127,12 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Main Content */}
           <div className="md:col-span-8">
-            <Card className="mb-6 glass-section">
+            <Card className="mb-6 glass-card hover:scale-[1.01] transition-all duration-300">
               <CardHeader>
-                <CardTitle>SGSCRIPT</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-500"></div>
+                  SGSCRIPT
+                </CardTitle>
                 <CardDescription>
                   Premium Training View Indicator
                 </CardDescription>
@@ -150,10 +174,13 @@ const Dashboard = () => {
             </Card>
 
             {/* Monthly Scratch Card */}
-            <Card className="mb-6 overflow-hidden glass-section">
-              <div className="bg-card-gradient h-2"></div>
+            <Card className="mb-6 overflow-hidden glass-card hover:scale-[1.01] transition-all duration-300">
+              <div className="bg-gradient-to-r from-cyan-400/20 to-blue-500/20 h-2"></div>
               <CardHeader>
-                <CardTitle>Monthly Rewards</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+                  Monthly Rewards
+                </CardTitle>
                 <CardDescription>
                   Get a scratch card at the end of every subscription month
                 </CardDescription>
@@ -214,11 +241,70 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Referral Scratch Card */}
-            <Card className="mb-6 overflow-hidden glass-section">
+            {/* Standard Referral Scratch Card */}
+            <Card className="mb-6 overflow-hidden glass-card hover:scale-[1.01] transition-all duration-300">
+              <div className="bg-gradient-to-r from-green-400/20 to-emerald-500/20 h-2"></div>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-green-400 to-emerald-500"></div>
+                  Standard Referral Rewards
+                </CardTitle>
+                <CardDescription>
+                  Monthly scratch card for users with 5+ referrals
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col md:flex-row items-center gap-6">
+                  <div className="w-full md:w-1/3">
+                    <div 
+                      className={`aspect-square rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4
+                        ${referralScratchCards.standard.available ? 'border-green-400/60 bg-gradient-to-br from-green-400/10 to-emerald-400/10' : 'border-muted-foreground/30'}`}
+                    >
+                      <div className="text-lg font-bold mb-2">Standard Card</div>
+                      <div className="text-sm text-muted-foreground mb-3 text-center">
+                        {referralScratchCards.standard.available ? 
+                          'Available monthly' : 
+                          'Reach 5 referrals to unlock'
+                        }
+                      </div>
+                      {referralScratchCards.standard.available && (
+                        <div className="text-lg font-bold text-center bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                          {referralScratchCards.standard.monthlyReward}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="w-full md:w-2/3">
+                    <h3 className="text-xl font-bold mb-2">Standard Member Benefits</h3>
+                    <p className="text-muted-foreground mb-4">
+                      Achieve 5 referrals to unlock monthly scratch cards with guaranteed rewards.
+                    </p>
+                    
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-green-400/10 border border-green-400/20">
+                        <span className="text-sm">5+ Referrals Required</span>
+                        <span className="font-semibold text-green-400">
+                          {referralScratchCards.standard.monthlyReward}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-muted-foreground">
+                      * Standard rewards are delivered monthly as scratch cards
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Club Referral Scratch Card */}
+            <Card className="mb-6 overflow-hidden glass-card hover:scale-[1.01] transition-all duration-300">
               <div className="bg-gradient-to-r from-yellow-400/20 to-purple-400/20 h-2"></div>
               <CardHeader>
-                <CardTitle>Referral Scratch Card</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-yellow-400 to-purple-400"></div>
+                  Club Referral Rewards
+                </CardTitle>
                 <CardDescription>
                   Annual rewards for Club members based on referral achievements
                 </CardDescription>
@@ -228,18 +314,18 @@ const Dashboard = () => {
                   <div className="w-full md:w-1/3">
                     <div 
                       className={`aspect-square rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-4
-                        ${referralScratchCard.available ? 'border-yellow-400/60 bg-gradient-to-br from-yellow-400/10 to-purple-400/10' : 'border-muted-foreground/30'}`}
+                        ${referralScratchCards.club.silver.available ? 'border-yellow-400/60 bg-gradient-to-br from-yellow-400/10 to-purple-400/10' : 'border-muted-foreground/30'}`}
                     >
                       <div className="text-lg font-bold mb-2">Club Scratch Card</div>
                       <div className="text-sm text-muted-foreground mb-3 text-center">
-                        {referralScratchCard.available ? 
-                          `Available ${formatDate(referralScratchCard.nextAvailableAt)}` : 
+                        {referralScratchCards.club.silver.available ? 
+                          `Available ${formatDate(referralScratchCards.club.silver.nextAvailableAt)}` : 
                           'Reach 25 referrals to unlock'
                         }
                       </div>
-                      {referralScratchCard.available && (
+                      {referralScratchCards.club.silver.available && (
                         <div className="text-lg font-bold text-center bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">
-                          {referralScratchCard.potentialReward}
+                          {referralScratchCards.club.silver.reward}
                         </div>
                       )}
                     </div>
@@ -282,9 +368,12 @@ const Dashboard = () => {
 
           {/* Sidebar */}
           <div className="md:col-span-4">
-            <Card className="mb-6 glass-premium">
+            <Card className="mb-6 glass-card hover:scale-[1.01] transition-all duration-300">
               <CardHeader>
-                <CardTitle>Account Status</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-pink-400 to-red-500"></div>
+                  Account Status
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -343,9 +432,12 @@ const Dashboard = () => {
               </CardFooter>
             </Card>
 
-            <Card className="glass-premium">
+            <Card className="glass-card hover:scale-[1.01] transition-all duration-300">
               <CardHeader>
-                <CardTitle>Need Help?</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-400 to-cyan-500"></div>
+                  Need Help?
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
