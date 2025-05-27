@@ -47,7 +47,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({ value, onChange, error }) => {
           <SelectTrigger className="w-[120px] glass-premium">
             <div className="flex items-center gap-2">
               <span className="text-lg">{selectedCountry.flag}</span>
-              <SelectValue placeholder={selectedCountry.dialCode} />
+              <span>{selectedCountry.dialCode}</span>
             </div>
           </SelectTrigger>
           <SelectContent className="glass-premium bg-black/80 backdrop-blur-xl border-white/10">
