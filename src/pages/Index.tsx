@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -401,12 +400,12 @@ const Index = () => {
       feature1Desc: 'ہمارे انڈیکیٹرز درستگی اور قابل اعتماد ہونے کو مدنظر رکھتے ہوئے بنائے گئے ہیں، آپ کو دستیاب بہترین ٹریڈنگ ٹولز فراہم کرتे ہیں۔',
       feature2Title: 'بجट پر آسان',
       feature2Desc: 'معیار سے سمجھوتا کیے بغیر سستی قیمتیں۔ ہمارे سبسکرپشن پلانز مختلف بجٹ کे مطابق ڈیزائن کیے گئے ہیں۔',
-      feature3Title: 'کام درست طریقے سے کرتا ہے',
+      feature3Title: 'کام درست طریقے سے कرتا ہے',
       feature3Desc: 'SGSCRIPT درست سگنلز اور بصیرتیں فراہم کرتا ہے جو آپ کو مسلسل آگاہی سے بھرپور ٹریڈنگ فیصلے کرنے میں مدد کرتे ہیں۔',
       whatWeveDone: 'ہم نے کیا کیا ہے',
       hearFromClients: 'ہمارे کلائنٹس सے سنیں',
       readyToWork: 'ہمارे सاتھ کام कرنے کे لیے تیار ہیں?',
-      readySubtext: 'آج ہی SGSCRIPT के साथ شروعات کریں اور اپنے ٹریڈنگ کے تجربے کو تبدیل کریں۔',
+      readySubtext: 'آج ہی SGSCRIPT के साथ شروعات کریں اور اپنे ٹریڈنگ کے تجربے کो تبدیل کریں۔',
       signUpNow: 'ابھی سائن اپ کریں',
       tradesAnalyzed: 'تجزیہ شدہ ٹریڈز',
       customersServed: 'خدمت کیے گئے کسٹمرز',
@@ -451,15 +450,16 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-          {/* Hero Background Ring */}
+          {/* Hero Background Ring - moved above gradient */}
           <div className="absolute inset-0 flex items-center justify-center">
             <img 
               src="/lovable-uploads/df6af4d6-8fc9-421d-921c-b9a6c763a8c8.png" 
               alt="Gradient ring background" 
-              className="w-full max-w-2xl h-auto opacity-40 animate-rotate-slow"
+              className="w-full max-w-3xl h-auto opacity-60 animate-rotate-slow"
             />
           </div>
+          {/* Lighter gradient overlay */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))]"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
