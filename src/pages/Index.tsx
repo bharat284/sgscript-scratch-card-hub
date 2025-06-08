@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -451,6 +452,14 @@ const Index = () => {
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+          {/* Hero Background Ring */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img 
+              src="/lovable-uploads/df6af4d6-8fc9-421d-921c-b9a6c763a8c8.png" 
+              alt="Gradient ring background" 
+              className="w-full max-w-2xl h-auto opacity-40 animate-rotate-slow"
+            />
+          </div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
