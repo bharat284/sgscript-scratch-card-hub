@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -130,11 +131,12 @@
   transform: translateY(-1px);
 }
 
-/* Page backgrounds with enhanced glass effect */
+/* Page backgrounds with enhanced glass effect - reduced opacity to 45% */
 .page-background {
   background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a1929 100%);
   position: relative;
   overflow: hidden;
+  opacity: 0.45;
 }
 
 .page-background::before {
