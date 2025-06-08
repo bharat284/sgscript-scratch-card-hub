@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface CountdownTimerProps {
-  expiryDate: Date;
+  expiryDate: Date | string;
 }
 
 const CountdownTimer = ({ expiryDate }: CountdownTimerProps) => {
@@ -15,7 +15,17 @@ const CountdownTimer = ({ expiryDate }: CountdownTimerProps) => {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const difference = expiryDate.getTime() - new Date().getTime();
+      // Ensure expiryDate is a proper Date object
+      const targetDate = expiryDate instanceof Date ? expiryDate : new Date(expiryDate);
+      
+      // Check if the date is valid
+      if (isNaN(targetDate.getTime())) {
+        console.error('Invalid expiry date provided to CountdownTimer:', expiryDate);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+
+      const difference = targetDate.getTime() - new Date().getTime();
       
       if (difference <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
